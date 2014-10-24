@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "nappulat.h"
+#include <iostream>
 #include "globals.h"
 
 class Lauta{

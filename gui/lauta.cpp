@@ -1,60 +1,58 @@
 #include "lauta.h"
 
 Lauta::Lauta(){
-	for (int i=0; i<16; i++){
-		if (i < 8){
-			mustat[i] = Sotilas();
-			valkoiset[i] = Sotilas();
-			break;
-		}	
-		if (i < 10){
-			mustat[i] = Torni();
-			valkoiset[i] = Torni();
-			break;
-		}
-		if (i < 12){
-			mustat[i] = Lahetti();
-			valkoiset[i] = Lahetti();
-		}
-		if (i < 14){
-			mustat[i] = Ratsu();
-			valkoiset[i] = Ratsu();
-			break;
-		}
-		if (i < 15){
-			mustat[i] = Kuningatar();
-			valkoiset[i] = Kuningatar();
-			break;
-		}
-		if (i < 16){
-			mustat[i] = Kuningas();
-			valkoiset[i] = Kuningas();
-		}
-	}
 	taustatex.loadFromFile("chessboard.gif");
 	tausta.setTexture(&taustatex);
 	tausta.setSize(sf::Vector2f(gl::WIDTH,gl::HEIGHT));
+	
+	nappulatex.loadFromFile("chessbuttons.png");
+	int divx = nappulatex.getSize().x / 6;
+	int divy = nappulatex.getSize().y / 12;
+
+	int x;
+	int my=0, vy=1;
+	
+	for (int i=0; i<8; i++){
+		x = 0;
+		mustat[i] = Sotilas();
+		valkoiset[i] = Sotilas();
+		mustat[i].setTexture(&nappulatex);
+		mustat[i].setTextureRect(sf::IntRect(divx*x,divy*my,divx,divy));
+		mustat[i].setSize(divx,divy);
+		valkoiset[i].setTexture(&nappulatex);
+		valkoiset[i].setTextureRect(sf::IntRect(divx*x,divy*vy,divx,divy));
+		valkoiset[i].setSize(divx,divy);
+	}
 
 	for (int i=0; i<8; i++){
 		for (int ii=0; ii<8; ii++){
 			ruudut[i][ii] = sf::Vector2f(gl::WIDTH/8*i,gl::HEIGHT/8*ii);
 		}
 	}
+
+	for (int i=0; i<2; i++){
+		for (int j=0; j<8; j++)
+			mustat[j*(i+1)].setPosition(ruudut[i][j]);
+	};
+
+	std::cout << "Laudan alustus valmis\n";
 };
 
 Lauta::~Lauta(){
 	delete [] &tausta;
 	delete [] &taustatex;
-	delete [] mustat;
-	delete [] valkoiset;
+	for (int i=0; i<16; i++){
+		delete [] &mustat[i];
+		delete [] &valkoiset[i];
+	}
 };
 
 void Lauta::piirra(sf::RenderWindow &w){
 	w.draw(tausta);
 	for (int i=0; i<16; i++){
-		if (mustat[i]->onPelissa())
+		if (mustat[i].onPelissa())
 			w.draw(mustat[i]);
-		if (valkoiset[i]->onPelissa())
+		if (valkoiset[i].onPelissa())
 			w.draw(valkoiset[i]);
 	}
 };
