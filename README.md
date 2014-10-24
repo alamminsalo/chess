@@ -1,4 +1,5 @@
 clientti:
+
 	tcpclientti:
 		viestilogiikka
 
@@ -11,5 +12,6 @@ clientti:
 		yhdistyssivu
 
 palvelin(java ee):
+
 	kuuntelu
 	viestilogiikka
