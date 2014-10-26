@@ -7,19 +7,19 @@
 
 class Nappula : public sf::RectangleShape{
 protected:
-	int x,y;
+	int id;
+	sf::Vector2i koordinaatti;
 	bool pelissa;
-	int tyyppi;
 
 public:
 	Nappula();
 	~Nappula();
-	virtual void liiku();
-	void setPaikka( int x,int y);
-	int getTyyppi();
 	bool onPelissa();
 	void setPelissa(bool b){ pelissa = b; };
 	void setSize(int,int);
+	void setKoordinaatti(int,int);
+	sf::Vector2i getKoordinaatti();
+	int getId();
 };
 
 

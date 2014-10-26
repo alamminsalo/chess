@@ -12,7 +12,7 @@ Pelaaja::~Pelaaja(){ //Destruktori
 };
 
 void Pelaaja::siirra(int i, int x, int y){
-	nappulat[i].setPaikka(x,y);
+	nappulat[i].setKoordinaatti(x,y);
 };
 
 void Pelaaja::poista(int i){ //Poistetaan pelaajalta nappula

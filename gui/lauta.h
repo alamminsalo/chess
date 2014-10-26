@@ -5,13 +5,15 @@
 #include "nappulat.h"
 #include <iostream>
 #include "globals.h"
+#include "ruutu.h"
 
 class Lauta{
 
 protected:
-	sf::Vector2f ruudut[8][8];
+	Ruutu ruudut[8][8];	
 	Nappula mustat[16];
 	Nappula valkoiset[16];
+	Nappula *valinta;
 	bool pelikaynnissa;
 	sf::Texture taustatex;
 	sf::Texture nappulatex;
@@ -23,6 +25,9 @@ public:
 	Nappula* getMustat();
 	Nappula* getValkoiset();
 	bool kaynnissa();
+	bool onValinta();
+	void liikuta(sf::Vector2i);
+	void setValinta(sf::Vector2i);
 };
 
 #endif

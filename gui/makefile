@@ -1,5 +1,5 @@
-CPP = main.cpp lauta.cpp pelaaja.cpp nappulat.cpp
-OBJECTS = main.o lauta.o pelaaja.o nappulat.o
+CPP = main.cpp lauta.cpp pelaaja.cpp nappulat.cpp ruutu.cpp
+OBJECTS = main.o lauta.o pelaaja.o nappulat.o ruutu.o
 LIBS = -lsfml-window -lsfml-audio -lsfml-system -lsfml-graphics
 
 sfml-app: $(OBJECTS)
