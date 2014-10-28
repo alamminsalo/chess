@@ -8,46 +8,53 @@
 \red255\green255\blue255;
 \red255\green255\blue255;}
 {\stylesheet
-{\s6\fi-430\li720\sbasedon28\snext28 Contents 1;}
-{\s7\fi-430\li1440\sbasedon28\snext28 Contents 2;}
-{\s1\fi-430\li720 Arrowhead List;}
-{\s27\fi-430\li720\sbasedon28 Lower Roman List;}
+{\s6\fi-429\li720\sbasedon28\snext28 Contents 1;}
+{\s7\fi-429\li1440\sbasedon28\snext28 Contents 2;}
+{\s1\fi-429\li720 Arrowhead List;}
+{\s27\fi-429\li720\sbasedon28 Lower Roman List;}
 {\s29\tx431\sbasedon20\snext28 Numbered Heading 1;}
 {\s30\tx431\sbasedon21\snext28 Numbered Heading 2;}
-{\s12\fi-430\li720 Diamond List;}
-{\s9\fi-430\li2880\sbasedon28\snext28 Contents 4;}
-{\s8\fi-430\li2160\sbasedon28\snext28 Contents 3;}
+{\s12\fi-429\li720 Diamond List;}
+{\s9\fi-429\li2880\sbasedon28\snext28 Contents 4;}
+{\s8\fi-429\li2160\sbasedon28\snext28 Contents 3;}
 {\s31\tx431\sbasedon22\snext28 Numbered Heading 3;}
-{\s32\fi-430\li720 Numbered List;}
+{\s32\fi-429\li720 Numbered List;}
 {\s15\sbasedon28 Endnote Text;}
 {\*\cs14\fs20\super Endnote Reference;}
-{\s4\fi-430\li720 Bullet List;}
+{\s4\fi-429\li720 Bullet List;}
 {\s5\tx1584\sbasedon29\snext28 Chapter Heading;}
-{\s35\fi-430\li720 Square List;}
-{\s11\fi-430\li720 Dashed List;}
+{\s35\fi-429\li720 Square List;}
+{\s11\fi-429\li720 Dashed List;}
 {\s22\sb440\sa60\f1\fs24\b\sbasedon28\snext28 Heading 3;}
-{\s37\fi-430\li720 Tick List;}
-{\s24\fi-430\li720 Heart List;}
-{\s40\fi-430\li720\sbasedon32 Upper Roman List;}
-{\s39\fi-430\li720\sbasedon32 Upper Case List;}
+{\s37\fi-429\li720 Tick List;}
+{\s24\fi-429\li720 Heart List;}
+{\s40\fi-429\li720\sbasedon32 Upper Roman List;}
+{\s39\fi-429\li720\sbasedon32 Upper Case List;}
 {\s16\fi-288\li288\fs20\sbasedon28 Footnote;}
-{\s19\fi-430\li720 Hand List;}
+{\s19\fi-429\li720 Hand List;}
 {\s18\fs20\sbasedon28 Footnote Text;}
 {\s20\sb440\sa60\f1\fs34\b\sbasedon28\snext28 Heading 1;}
 {\s21\sb440\sa60\f1\fs28\b\sbasedon28\snext28 Heading 2;}
-{\s10\qc\sb240\sa119\f1\fs32\b\sbasedon28\snext28 Contents Header;}
+{\s10\qc\sb240\sa118\f1\fs32\b\sbasedon28\snext28 Contents Header;}
 {\s23\sb440\sa60\f1\fs24\b\sbasedon28\snext28 Heading 4;}
 {\s28\f0\fs24 Normal;}
-{\s26\fi-430\li720\sbasedon32 Lower Case List;}
-{\s2\li1440\ri1440\sa119\sbasedon28 Block Text;}
+{\s26\fi-429\li720\sbasedon32 Lower Case List;}
+{\s2\li1440\ri1440\sa118\sbasedon28 Block Text;}
 {\s33\f2\sbasedon28 Plain Text;}
 {\s34\tx1584\sbasedon29\snext28 Section Heading;}
-{\s25\fi-430\li720 Implies List;}
-{\s3\fi-430\li720 Box List;}
-{\s36\fi-430\li720 Star List;}
+{\s25\fi-429\li720 Implies List;}
+{\s3\fi-429\li720 Box List;}
+{\s36\fi-429\li720 Star List;}
 {\*\cs17\fs20\super Footnote Reference;}
-{\s38\fi-430\li720 Triangle List;}
+{\s38\fi-429\li720 Triangle List;}
 {\s13\fi-288\li288\sbasedon28 Endnote;}}
+{\*\listtable
+{\list\listtemplateid1152{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\li720{\leveltext\'04\'00.\'01.;}{\levelnumbers\'01\'03;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}{\listlevel\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}}\listid1015}}
+{\*\listoverridetable
+{\listoverride\listoverridecount0\listid1015\levelnfc0\levelstartat1\levelspace0\levelfollow0\fi-429\li720{\leveltext\'02\'00.;}{\levelnumbers\'01;}\ls1}
+{\listoverride\listoverridecount0\listid1015\levelnfc0\levelstartat1\levelspace0\levelfollow0\li720{\leveltext\'04\'00.\'01.;}{\levelnumbers\'01\'03;}\ls2}
+{\listoverride\listoverridecount0\listid1015\levelnfc0\levelstartat1\levelspace0\levelfollow0\li720{\leveltext\'04\'00.\'01.;}{\levelnumbers\'01\'03;}\ls3}}
+
 \kerning0\cf0\ftnbj\fet2\ftnstart1\ftnnar\aftnnar\ftnstart1\aftnstart1\aenddoc\revprop3{\*\rdf}{\info\uc1}\deftab720\viewkind1\paperw12240\paperh15840\margl1440\margr1440\widowctrl
 \sectd\sbknone\colsx360\pgncont\ltrsect
 \pard\plain\ltrpar\qc\s28\sl240\slmult1\itap0{\s28\f0\fs36\lang1033{\*\listtag0}\abinodiroverride\ltrch Suunnitelmadokumentti}{\s28\f0\fs36\lang1033{\*\listtag0}\par}
@@ -61,15 +68,84 @@
 \pard\plain\ltrpar\qc\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
 \pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
 \pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 1. Projektin l\'e4ht\'f6kohdat}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+{\listtext\pard\fi-429\li720 1.	}\pard\plain{\ltrpar\ql\fi-429\li720\s28{\*\abilist\abilistid1015\abilistparentid0\abilistlevel1\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnlvlbody\pndec{\pntxtb }{\pntxta .}}\fn-429\li720\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Projektin l\'e4ht\'f6kohdat}{\s28\f0\fs24\lang1033{\*\listtag1016}\par}
+}{\listtext\pard\fi-429\li720 2.	}\pard\plain{\ltrpar\ql\fi-429\li720\s28{\*\abilist\abilistid1015\abilistparentid1015\abilistlevel1\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnlvlbody\pndec{\pntxtb }{\pntxta .}}\fn-429\li720\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Toteutussuunnitelma}{\s28\f0\fs24\lang1033{\*\listtag1017}\par}
+}{\listtext\pard\li720 2.1.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1021\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls2\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Luokkarakenne ja a}{\s28\f0\fs24\lang1033{\*\listtag0}rkkitehtuuri}{\s28\f0\fs24\lang1033{\*\listtag1019}\par}
+}{\listtext\pard\li720 2.2.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1021\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls2\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Web-socket-toiminnallisuus}{\s28\f0\fs24\lang1033{\*\listtag1023}\par}
+}{\listtext\pard\li720 2.3.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1021\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls2\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch QT-valikkorakenne}{\s28\f0\fs24\lang1033{\*\listtag1024}\par}
+}{\listtext\pard\fi-429\li720 3.	}\pard\plain{\ltrpar\ql\fi-429\li720\s28{\*\abilist\abilistid1015\abilistparentid1015\abilistlevel1\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnlvlbody\pndec{\pntxtb }{\pntxta .}}\fn-429\li720\ls1\ilvl0\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Liitteet}{\s28\f0\fs24\lang1033{\*\listtag1025}\par}
+}{\listtext\pard\li720 3.1.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1027\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls3\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Luokkakaavio}{\s28\f0\fs24\lang1033{\*\listtag1026}\par}
+}{\listtext\pard\li720 3.2.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1027\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls3\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Server-client-logiikkakaavio}{\s28\f0\fs24\lang1033{\*\listtag1029}\par}
+}{\listtext\pard\li720 3.3.	}\pard\plain{\ltrpar\ql\li720\s28{\*\abilist\abilistid1027\abilistparentid1015\abilistlevel2\abistartat1{\abifieldfont NULL}{\abilistdecimal .}{\abilistdelim %L.}{\abiliststyle Numbered List}}{\*\pn\pnql\pnstart1\pnprev\pnlvl9\pndec{\pntxtb }{\pntxta .}}\li720\ls3\ilvl1\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Mockup valikoista}{\s28\f0\fs24\lang1033{\*\listtag1063}\par}
+}\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
 \pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 2. Toteutussuunnitelma}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 2.1 Luokkarakenne}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 2.2 Arkkitehtuuri}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 2.3 Web-socket-toiminnallisuus}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 2.4 QT5-valikkorakenne}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
 \pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 3. Liitteet}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 3.1 Luokkakaavio}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 3.2 Arkkitehtuurikaavio}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
-\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch \tab 3.3 Server-client-logiikkakaavio}{\s28\f0\fs24\lang1033{\*\listtag0}\par}}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs32\lang1033{\*\listtag0}\abinodiroverride\ltrch 1. Projektin l\'e4ht\'f6kohdat}{\s28\f0\fs32\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Valitsimme harjoitusty\'f6mme aiheeksi shakkipelin, jota pystyisi pelaamaan kaverin kanssa tcp-yhteyden yli pist\'e4m\'e4ll\'e4 pystyyn palvelimen (t\'e4ss\'e4 tapauksessa javaee-toteutus) johon molemmat sitten yhdist\'e4isiv\'e4t.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch N\'e4imme mahdollisuuden yhdistell\'e4 muutamia kursseja t\'e4ss\'e4 jaksossa yhdeksi harjoitusty\'f6kokonaisuudeksi, jossa olisi mahdollista hy\'f6dynt\'e4\'e4 tekniikoita kaikkien kurssien osa-alueilta. Asiakasohjelma teht\'e4isiin qt-frameworkilla ja sfml-kirjastolla. Palvelin toteutettaisiin javaee-serverin\'e4.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs32\lang1033{\*\listtag0}\abinodiroverride\ltrch 2. Toteutussuunnitelma}{\s28\f0\fs32\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 2.1 Luokkarakenne ja arkkitehtuuri}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Luokkarakenne ei ole t\'e4ll\'e4 hetkell\'e4 t\'e4ysin viimeisen p\'e4\'e4lle suunniteltu, mutta tarkoitus olisi ett\'e4 ainakin erilaiset pelinappulat periytyisiv\'e4t kaikki samasta kantaluokasta. }{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Koosteluokkana, ja samalla my\'f6s sellaisena minne kaikki toiminta \uc1\u8220\'93keskittyy\uc1\u8221\'94, toimii Lauta-luokka. Se pit\'e4\'e4 sis\'e4ll\'e4\'e4n kaikki nappulat sek\'e4 ruutu-oliot (jotka toimivat apuna logiikan kehittelyss\'e4) ja jakelee siirtovuorot pelaajille sek\'e4 validoi tehdyt siirrot. T\'e4ss\'e4 toteutuksessa piilee kuitenkin yksi ongelma, sill\'e4 t}{\s28\f0\fs24\lang1033{\*\listtag0}\'e4ll\'e4isella mallinnustavalla emme ole saaneet aikaiseksi sellaista mallia, miss\'e4 p\'e4\'e4sisimme k\'e4ytt\'e4m\'e4\'e4n nappulaluokissa virtuaalifunktioita ja n\'e4in toteuttamaan kurssin tavoitteita. }{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Yksi mahdollisuus olisi k\'e4\'e4nteinen malli, jossa kaikilla nappuloilla olisi osoittimen kautta p\'e4\'e4sy lautaan ja n\'e4in muiden nappuloiden sijainteihin. N\'e4in nappulat itse pystyisiv\'e4t metodien kautta laskemaan, mihin niit\'e4 voi siirt\'e4\'e4 ja t\'e4st\'e4 voisi sitten saada aikaiseksi hieman aktiivisemman luokkarakenteen. }{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Linkitettyjen listojen rakenteita voisi hy\'f6dynt\'e4\'e4, jos peliin tekisi mahdolliseen n\'e4ytt\'e4\'e4 edellisi\'e4 siirtoja uudelleen. T\'e4m\'e4 tosin ei vaatisi juurikaan v\'e4list\'e4poistoja tai insertointia, joten t\'e4st\'e4 tulisi melko passiivinen linkitetty lista.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 2.2 Web-rakenne ja toiminnallisuus}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Web-toiminnallisuus rakennettaisiin hy\'f6dynt\'e4m\'e4ll\'e4 tcp-socket yhteyksi\'e4. Palvelin j\'e4tet\'e4\'e4n yhteyksien synnytty\'e4 kuuntelemaan viestej\'e4 socketeista ja v\'e4litt\'e4m\'e4\'e4n tapahtumat taustalla py\'f6riv\'e4\'e4n pelilogiikkaan (palvelimessa py\'f6riv\'e4\'e4n tai asiakasohjelmiin) siirtoviestien saavuttua.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Minimiss\'e4\'e4n palvelin onnistuisi ehk\'e4 jopa yksis\'e4ikeisen\'e4 prosessina, todenn\'e4k\'f6isesti kuitenkin tulemme tarvitsemaan useampaa s\'e4iett\'e4 (ainakin yksi molemmille pelaajille). Blokkaavat funktiot (accept, read) eiv\'e4t t\'e4ss\'e4 ohjelmistossa olisi niink\'e4\'e4n haitta vaan osa toiminnallisuutta:}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Kun palvelin k\'e4ynnistet\'e4\'e4n, se odottaa ensimm\'e4iseen sockettiin asiakasta, joka asetetaan pelaamaan valkoista puolta. Sitten j\'e4\'e4d\'e4\'e4n odottamaan toista asiakasta, joka asetetaan mustalle puolelle. T\'e4m\'e4n j\'e4lkeen palvelin j\'e4\'e4 odottamaan valkoisen pelaajan siirtoa, ja t\'e4m\'e4n suorittaessa siirron l\'e4hetet\'e4\'e4n palvelimelle rimpsu (esim \uc1\u8220\'93a1c8\uc1\u8221\'94) joka sitten palvelimelta l\'e4hetet\'e4\'e4n mustan pelaajan ohjelmaan ja liikutetaan siell\'e4 asianmukaista nappulaa. }{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch En ole t\'e4ss\'e4 vaiheessa ihan varma tulisiko pelilogiikka olla palvelimella vai tulisiko asiakasohjelmien tehd\'e4 logiikkalaskelmat molempien omissa p\'e4iss\'e4\'e4n. T\'e4ll\'f6in palvelimen ei tarvitsisi k\'e4yt\'e4nn\'f6ss\'e4 tehd\'e4 muuta kuin v\'e4litt\'e4\'e4 viestit eteenp\'e4in(t\'e4m\'e4 saattaisi kyll\'e4kin mahdollistaa toisen pelaajan huijaamisen esim. muistiskannereita hyv\'e4ksik\'e4ytt\'e4en..).}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch Palvelin voisi periaatteessa tallentaa kaikki siirrot kantaan, josta niit\'e4 voisi my\'f6hemmin katsoa ohjelmalla (k\'e4yt\'e4nn\'f6ss\'e4 luomalla pelikohtaisen taulun molemmille joukkueille ja ty\'f6nt\'e4m\'e4ll\'e4 siirtokoordinaatit sellaisenaan tauluun). N\'e4m\'e4 ovat tietty sitten \uc1\u8220\'93ekstraa\uc1\u8221\'94 mutta toisivat hienon lis\'e4n ohjelmaan.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 2.3 QT-valikkorakenne}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch P\'e4\'e4tarkoitus qt-rajapinnan hy\'f6dynt\'e4misess\'e4 projektissa ainakin t\'e4ss\'e4 vaiheessa olisi p\'e4\'e4valikko, josta voisi joko yhdist\'e4\'e4 palvelimeen tai aloittaa pelin pelin paikallisesti. My\'f6s yhteydenkatkaisunappi voisi l\'f6yty\'e4. Emme ole ehtineet hirve\'e4sti n\'e4in aikaisessa vaiheessa valikoita mietti\'e4 mutta toivon ett\'e4 niihinkin saisi edes hieman qt-kurssia vastaavaa sis\'e4lt\'f6\'e4. }{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch En ole viel\'e4 varma olisiko palvelimen tietokannan selaukseen / k\'e4ytyjen otteluiden katsomisen mahdollisuus toteutettavissa.}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs32\lang1033{\*\listtag0}\abinodiroverride\ltrch 3. Liitteet}{\s28\f0\fs32\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 3.1 Luokkakaavio}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 3.2 Server-client-logiikkakaavio}{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\par}
+\pard\plain\ltrpar\ql\s28\sl240\slmult1\itap0{\s28\f0\fs24\lang1033{\*\listtag0}\abinodiroverride\ltrch 3.3 Mockup valikoista}{\s28\f0\fs24\lang1033{\*\listtag0}\par}}
