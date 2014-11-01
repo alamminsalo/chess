@@ -7,8 +7,6 @@
 
 class Nappula : public sf::RectangleShape{
 protected:
-	int id;
-	sf::Vector2i koordinaatti;
 	bool pelissa;
 
 public:
