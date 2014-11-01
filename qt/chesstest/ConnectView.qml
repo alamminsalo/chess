@@ -1,5 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
+import StartExternal 1.0
+
 
 ApplicationWindow {
     visible: true
@@ -10,6 +12,10 @@ ApplicationWindow {
     maximumHeight: 600
     maximumWidth: 600
     title: qsTr("Main Menu")
+
+    StartExternal{
+        id: gameview
+    }
 
     menuBar: MenuBar {
         Menu {
@@ -46,21 +52,22 @@ ApplicationWindow {
     }
 
     TextField {
-        id: textField1
+        id: ip
         x: 174
         y: 226
         width: 174
         height: 25
-        placeholderText: qsTr("Text Field")
+        readOnly: false
+        placeholderText: qsTr("")
     }
 
     TextField {
-        id: textField2
+        id: port
         x: 361
         y: 226
         width: 65
         height: 25
-        placeholderText: qsTr("Text Field")
+        placeholderText: qsTr("")
     }
 
     Text {
@@ -90,6 +97,13 @@ ApplicationWindow {
         x: 341
         y: 281
         text: qsTr("Connect")
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                gameview.start(ip.text+":"+port.text);
+                Qt.quit();
+            }
+        }
     }
 
     Button {

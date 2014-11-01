@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
+import StartExternal 1.0
 
 ApplicationWindow {
     id: mainView
@@ -11,6 +12,10 @@ ApplicationWindow {
     maximumHeight: 600
     maximumWidth: 600
     title: qsTr("Main Menu")
+
+    StartExternal{
+        id: gameview
+    }
 
     menuBar: MenuBar {
         Menu {
@@ -56,6 +61,14 @@ ApplicationWindow {
         tooltip: "Start a game locally"
         activeFocusOnPress: false
         enabled: true
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                gameview.start("local");
+                Qt.quit();
+            }
+
+        }
     }
 
     Button {
@@ -67,7 +80,6 @@ ApplicationWindow {
         MouseArea{
             anchors.fill: parent
             onClicked: pageLoader.source = "qrc:/ConnectView.qml"
-
         }
 
     }
