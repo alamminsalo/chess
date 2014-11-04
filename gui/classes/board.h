@@ -1,7 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <iostream>
 #include "piece.h"
+
+class Piece;
 
 struct Square{
 	bool active;
@@ -9,6 +12,7 @@ struct Square{
 };
 
 struct Team{
+	bool oncheck;
 	Piece **piece;
 };
 
@@ -25,8 +29,13 @@ public:
 	void reset();
 	void select(Piece*);
 	void deselect();
-	void giveTurn(Team*);
+	bool isActiveSquare(int,int);
 	Square* getSquare(int,int);
+	bool getTeam();
+	void switchTurn();
+	void setCheck(bool);
+	bool teamOnCheck(bool);
+	void checkPositions();
 };
 
 #endif
