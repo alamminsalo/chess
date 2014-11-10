@@ -1,6 +1,7 @@
 #include "piece.h"
 
 Piece::Piece(){
+	type = NOTYPE;
 	position_first = new Position();
 	position = position_first;
 	team = true;
@@ -42,15 +43,17 @@ void Piece::move(int x,int y){
 	position = position->next;
 	position->x = x; 
 	position->y = y;
+	position->turn = board->getTurn();
 	board->getSquare(position->x,position->y)->piece = this;
 	board->deselect();
 	board->switchTurn();
 }
 
 void Pawn::setActive(){
-	int dir = 1;
+	std::cout<<"Setting active pawn...\n";
+	int dir;
 	int moves = 1;
-	if (board->getTeam()) dir = -1;
+	dir = board->getTurn() % 2 == 0 ? -1 : 1;
 	if (!hasMoved) moves++;
 
 	for (int i=0, y=position->y; i < moves; i++,y+=dir)
@@ -80,28 +83,34 @@ void Pawn::setActive(){
 	}
 }
 Pawn::Pawn(){
+	type = PAWN;
 	hasMoved = false;
 	std::cout<<"Created Pawn!\n";
 }
 
 Bishop::Bishop(){
+	type = BISHOP;
 	std::cout<<"Created Bishop!\n";
 }
 Rook::Rook(){
+	type = ROOK;
 	std::cout<<"Created rook!\n";
 }
 Knight::Knight(){
+	type = KNIGHT;
 	std::cout<<"Created knight!\n";
 }
 Queen::Queen(){
+	type = QUEEN;
 	std::cout<<"Created queen!\n";
 }
 King::King(){
+	type = KING;
 	std::cout<<"Created king!\n";
 }
 
 void Bishop::setActive(){
-
+	
 }
 
 void Knight::setActive(){

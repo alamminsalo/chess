@@ -13,7 +13,7 @@ struct Square{
 
 struct Team{
 	bool oncheck;
-	Piece **piece;
+	Piece *piece[16];
 };
 
 class Board{
@@ -21,6 +21,7 @@ protected:
 	Team black;
 	Team white;
 	Square square[8][8];
+	Piece *selected;
 	int turns;
 	void setupTeamsDefault();
 public:
@@ -31,11 +32,14 @@ public:
 	void deselect();
 	bool isActiveSquare(int,int);
 	Square* getSquare(int,int);
-	bool getTeam();
 	void switchTurn();
+	int getTurn();
 	void setCheck(bool);
 	bool teamOnCheck(bool);
 	void checkPositions();
+	void manage();
+	Team* getTeam(unsigned short id){ return id == 0 ? &black : &white; };
+	Piece* getSelected(){ return selected; };
 };
 
 #endif

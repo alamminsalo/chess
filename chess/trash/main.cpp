@@ -2,21 +2,18 @@
 #include <iostream>
 #include "lauta.h"
 #include "globals.h"
-#include "pelaaja.h"
+#include "classes/board.h"
 
 sf::RenderWindow window;
 Lauta *lauta;
-Pelaaja *pelaaja1;
-Pelaaja *pelaaja2;
 
 int main()
 {
     window.create(sf::VideoMode(gl::WIDTH,gl::HEIGHT), "chess!");
-	window.setFramerateLimit(10);
+	window.setFramerateLimit(15);
 
 	lauta = new Lauta();
-	pelaaja1 = new Pelaaja(0,*lauta);
-	pelaaja2 = new Pelaaja(1,*lauta);	
+
 
     while (window.isOpen())
     {
@@ -27,7 +24,6 @@ int main()
                 window.close();
 			if (event.type == sf::Event::MouseButtonPressed)
 				if (event.mouseButton.button== sf::Mouse::Left){
-					std::cout << "Mouse pressed!\n";
 					if (lauta->onValinta())
 						lauta->liikuta(sf::Mouse::getPosition(window));
 					else lauta->setValinta(sf::Mouse::getPosition(window));
@@ -37,7 +33,7 @@ int main()
 		lauta->piirra(window);
         window.display();
     }
-	delete [] lauta;
+	delete lauta;
 
     return 0;
 }

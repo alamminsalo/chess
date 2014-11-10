@@ -132,8 +132,10 @@ void Lauta::setValinta(sf::Vector2i mp){
 	for (int y=0; y<8; y++)
 		for (int x=0; x<8; x++)
 			if (ruudut[x][y].getGlobalBounds().contains(mp.x,mp.y)){
-				if (ruudut[x][y].hasNappula())
+				if (ruudut[x][y].hasNappula()){
 					valinta = ruudut[x][y].getNappula();
+
+				}
 				break;
 			}
 	// Tänne logiikka millä asetetaan aktiivisiksi ruudut joihin voidaan liikkua!

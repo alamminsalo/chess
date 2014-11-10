@@ -1,12 +1,11 @@
 #include "board.h"
 
 Board::Board(){
-	black.piece = new Piece*[16];
 	black.oncheck = false;
-	white.piece = new Piece*[16];
 	white.oncheck = false;
-	reset();	
 	std::cout<<"Created board.\n";
+	selected = NULL;
+	reset();	
 }
 
 Board::~Board(){
@@ -67,15 +66,18 @@ void Board::setupTeamsDefault(){
 				white.piece[i] = new King();
 				white.piece[i]->setup(order[i%8],7,this);
 		}
-		black.piece[i]->setBlackTeam();
+		white.piece[i]->setTeam(0);
+		black.piece[i]->setTeam(1);
 	}
 }
 
 void Board::select(Piece *piece){
 	piece->setActive();		
+	selected = piece;
 }
 
 void Board::deselect(){
+	selected = NULL;
 	for (int y=0; y < 8; y++)
 		for (int x=0; x < 8; x++)
 			square[x][y].active = false;
@@ -89,8 +91,8 @@ bool Board::isActiveSquare(int x, int y){
 	return square[x][y].active;
 }
 
-bool Board::getTeam(){
-	return (turns % 2 == 0) ? true : false;
+int Board::getTurn(){
+	return turns;
 }
  void Board::switchTurn(){
 	 turns++;
@@ -112,3 +114,4 @@ void Board::checkPositions(){
 		std::cout<<"Piece at ["<<black.piece[i]->getX()<<","<<black.piece[i]->getY()<<"]\n";
 	}	
 }
+
