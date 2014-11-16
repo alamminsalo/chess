@@ -54,7 +54,7 @@ public:
 	bool isKing(){ return false; };
 };
 
-class Rook: public Piece{
+class Rook: public virtual Piece{
 public:
 	Rook();
 	~Rook(){};
@@ -62,11 +62,11 @@ public:
 	bool isKing(){ return false; };
 };
 
-class Bishop: public Piece{
+class Bishop: public virtual Piece{
 public:
 	Bishop();
 	~Bishop(){};
-	void setActive();
+	virtual void setActive();
 	bool isKing(){ return false; };
 };
 
@@ -74,11 +74,11 @@ class Knight: public Piece{
 public:
 	Knight();
 	~Knight(){};
-	void setActive();
+	virtual void setActive();
 	bool isKing(){ return false; };
 };
 
-class Queen: public Piece{
+class Queen: public Rook, public Bishop{
 public:
 	Queen();
 	~Queen(){};

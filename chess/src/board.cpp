@@ -1,5 +1,7 @@
 #include "board.h"
 
+
+
 Board::Board(){
 	black.oncheck = false;
 	white.oncheck = false;

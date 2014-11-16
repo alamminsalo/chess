@@ -110,21 +110,158 @@ King::King(){
 }
 
 void Bishop::setActive(){
-	
+	Square *tmpsqr;
+	for (int y=position->y-1, x=position->x-1; x>-1 && y>-1; x--,y--){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y+1, x=position->x+1; x<8 && y<8; x++,y++){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y-1, x=position->x+1; x<8 && y>-1; x++, y--){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y+1, x=position->x-1; y<8 && x>-1; x--,y++){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
 }
 
 void Knight::setActive(){
-
+	Square *tmpsqr;
+	int x, y;
+	for (int i=0; i<8; i++){
+		x = position->x;
+		y = position->y;
+		switch(i){
+			case 0:
+				x++; y-=2;
+				break;
+			case 1:
+				x+=2; y--;
+				break;
+			case 2:
+				x+=2; y++;
+				break;
+			case 3:
+				x++; y+=2;
+				break;
+			case 4:
+				x--; y+=2;
+				break;
+			case 5:
+				x-=2; y++;
+				break;
+			case 6:
+				x-=2; y--;
+				break;
+			case 7:
+				x--; y-=2;
+				break;
+		}
+		if ((x>-1 && y>-1) && (x<8 && y<8)){
+			tmpsqr = board->getSquare(x,y);
+			tmpsqr->active = true;
+			if (tmpsqr->piece){
+				if (tmpsqr->piece->getTeam() == this->getTeam())
+					tmpsqr->active = false;
+			}
+		}
+	}
 }
 
 void Rook::setActive(){
-
+	Square *tmpsqr;
+	for (int y=position->y, x=position->x-1; x>-1; x--){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y, x=position->x+1; x<8; x++){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y-1, x=position->x; y>-1; y--){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
+	for (int y=position->y+1, x=position->x; y<8; y++){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+			break;
+		}
+	}
 }
 
 void Queen::setActive(){
-
+	Rook::setActive();
+	Bishop::setActive();	
 }
 
 void King::setActive(){
-
+	int x = position->x;
+	int y = position->y;
+	Square *tmpsqr;
+	for (int i=0; i<8; i++){
+		switch(i){
+			case 0:case 6: case 7:
+				y--;
+				break;
+			case 1:
+				x++;
+				break;
+			case 2: case 3:
+				y++;
+				break;
+			case 4: case 5:
+				x--;
+		}
+		if ((x>-1 && y>-1) && (x<8 && y<8)){
+			tmpsqr = board->getSquare(x,y);
+			tmpsqr->active = true;
+			if (tmpsqr->piece){
+				if (tmpsqr->piece->getTeam() == this->getTeam())
+					tmpsqr->active = false;
+			}
+		}
+	}
 }
