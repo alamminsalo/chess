@@ -11,6 +11,9 @@
 #define QUEEN 5
 #define KING 6
 
+#define WHITE 0
+#define BLACK 1
+
 class Board;
 
 struct Position{
@@ -24,7 +27,7 @@ class Piece{
 protected:
 	Board *board;
 	Position *position_first;
-	Position *position;
+	Position *position, *pos_back;
 	bool captured;
 	unsigned short team;
 	unsigned short type;
@@ -41,17 +44,16 @@ public:
 	int getX(){return position->x;};
 	int getY(){return position->y;};
 	virtual bool isKing(){ return false; };
+	void revert();
 	virtual void setActive();	
 	unsigned short getType(){return type;};
 };
 
 class Pawn: public Piece{
-	bool hasMoved;	
 public:
 	Pawn();
 	~Pawn(){};
 	void setActive();	
-	bool isKing(){ return false; };
 };
 
 class Rook: public virtual Piece{
@@ -59,7 +61,6 @@ public:
 	Rook();
 	~Rook(){};
 	void setActive();
-	bool isKing(){ return false; };
 };
 
 class Bishop: public virtual Piece{
@@ -67,7 +68,6 @@ public:
 	Bishop();
 	~Bishop(){};
 	virtual void setActive();
-	bool isKing(){ return false; };
 };
 
 class Knight: public Piece{
@@ -75,7 +75,6 @@ public:
 	Knight();
 	~Knight(){};
 	virtual void setActive();
-	bool isKing(){ return false; };
 };
 
 class Queen: public Rook, public Bishop{
@@ -83,7 +82,6 @@ public:
 	Queen();
 	~Queen(){};
 	void setActive();
-	bool isKing(){ return false; };
 };
 
 class King: public Piece{

@@ -12,7 +12,7 @@ struct Square{
 };
 
 struct Team{
-	bool oncheck;
+	bool oncheck, hasturn;
 	Piece *piece[16];
 };
 
@@ -34,12 +34,14 @@ public:
 	Square* getSquare(int,int);
 	void switchTurn();
 	int getTurn();
-	void setCheck(bool);
+	void setCheck(unsigned short);
 	bool teamOnCheck(bool);
 	void checkPositions();
 	void manage();
-	Team* getTeam(unsigned short id){ return id == 0 ? &black : &white; };
+	Team* getTeam(unsigned short id){ return id == 0 ? &white : &black; };
+	Team* getActiveTeam(){ return white.hasturn ? &white : &black;};
 	Piece* getSelected(){ return selected; };
+	void moveSelected(int,int);
 };
 
 #endif

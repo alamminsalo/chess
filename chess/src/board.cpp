@@ -1,10 +1,10 @@
 #include "board.h"
 
-
-
 Board::Board(){
 	black.oncheck = false;
 	white.oncheck = false;
+	black.hasturn = false;
+	white.hasturn = true;
 	std::cout<<"Created board.\n";
 	selected = NULL;
 	reset();	
@@ -26,6 +26,7 @@ void Board::reset(){
 		}
 	setupTeamsDefault();
 	std::cout<<"Set up teams.\n";
+	std::cout<<"White has turn\n";
 }
 
 void Board::setupTeamsDefault(){
@@ -98,22 +99,65 @@ int Board::getTurn(){
 }
  void Board::switchTurn(){
 	 turns++;
+	 black.hasturn = !black.hasturn;
+	 white.hasturn = !white.hasturn;
+
+	 if (black.hasturn) std::cout<<"Black has turn.\n";
+	 if (white.hasturn) std::cout<<"White has turn.\n";
  }
 
 bool Board::teamOnCheck(bool team){
 	return team ? white.oncheck : black.oncheck;	
 }
 
-void Board::setCheck(bool b){
-	if (b)
+void Board::setCheck(unsigned short team){
+	if (team == 0)
 		white.oncheck = true;
 	else black.oncheck = true;
 }
 
 void Board::checkPositions(){
+	deselect();
+	black.oncheck = white.oncheck = false;
 	for (int i=0; i<16; i++){
-		std::cout<<"Piece at ["<<white.piece[i]->getX()<<","<<white.piece[i]->getY()<<"]\n";
-		std::cout<<"Piece at ["<<black.piece[i]->getX()<<","<<black.piece[i]->getY()<<"]\n";
-	}	
+		if (!black.piece[i]->isCaptured()){
+			black.piece[i]->setActive();
+			if (square[white.piece[15]->getX()][white.piece[15]->getY()].active){
+				white.oncheck = true;
+				std::cout<<"White on check!\n";
+			}
+			deselect();
+		}
+		
+		if (!white.piece[i]->isCaptured()){
+			white.piece[i]->setActive();
+			if (square[black.piece[15]->getX()][black.piece[15]->getY()].active){
+				black.oncheck = true;
+				std::cout<<"Black on check!\n";
+			}
+			deselect();
+		}
+	}
+}
+
+void Board::moveSelected(int x, int y){
+	Piece *pc = square[x][y].piece ? square[x][y].piece : NULL;
+
+	selected->move(x,y);
+	Piece *tmp_sel = selected;
+
+	checkPositions();
+	if (getActiveTeam()->oncheck){
+		std::cout<<"ERROR: Move puts this team on check.\n";	
+		tmp_sel->revert();
+		if (pc){
+			square[x][y].piece = pc;
+			square[x][y].piece->setCaptured(false);
+		}
+	}
+	else{
+		switchTurn();
+	}
+
 }
 

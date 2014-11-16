@@ -2,9 +2,6 @@
 
 Piece::Piece(){
 	type = NOTYPE;
-	position_first = new Position();
-	position = position_first;
-	team = true;
 	captured = false;
 }
 
@@ -28,9 +25,27 @@ void Piece::setActive(){
 		}
 }
 
+void Piece::revert(){
+	std::cout<<"Reverting..\n";
+	move(pos_back->x,pos_back->y);
+//	std::cout<<"Starting from "<<tmp_ptr->x<<","<<tmp_ptr->y<<std::endl;
+//	while (tmp_ptr->next != position){
+//		std::cout<<"Found next position on list->\n";
+//		tmp_ptr = tmp_ptr->next;
+//	}
+//	board->getSquare(tmp_ptr->x,tmp_ptr->y)->piece = this;
+//	board->getSquare(tmp_ptr->next->x,tmp_ptr->next->y)->piece = NULL;
+//	delete tmp_ptr->next;
+//	tmp_ptr->next = NULL;
+//	position = tmp_ptr;
+	std::cout<<"Done reverting.\n";
+}
+
 void Piece::setup(int x, int y, Board *b){
-	position->x = x;
-	position->y = y;	
+	position_first = new Position();
+	position_first->x = x;
+	position_first->y = y;	
+	position = position_first;
 	board = b;
 	board->getSquare(x,y)->piece = this;
 }
@@ -39,52 +54,59 @@ void Piece::move(int x,int y){
 	if (board->getSquare(x,y)->piece)
 		board->getSquare(x,y)->piece->setCaptured(true);
 	board->getSquare(position->x,position->y)->piece = NULL;
+	pos_back = position;
 	position->next = new Position();
 	position = position->next;
 	position->x = x; 
 	position->y = y;
 	position->turn = board->getTurn();
 	board->getSquare(position->x,position->y)->piece = this;
-	board->deselect();
-	board->switchTurn();
+	std::cout<<"piece at: "<<position_first->x<<","<<position_first->y<<"\n";
+//	board->deselect();
+//	board->switchTurn();
 }
 
 void Pawn::setActive(){
-	std::cout<<"Setting active pawn...\n";
-	int dir;
-	int moves = 1;
-	dir = board->getTurn() % 2 == 0 ? -1 : 1;
-	if (!hasMoved) moves++;
-
-	for (int i=0, y=position->y; i < moves; i++,y+=dir)
-		if (!board->getSquare(position->x,y)->piece)
-			board->getSquare(position->x,y)->active = true;	
-	int x = position->x -1;
-	int y = position->y +dir;
-	Square *sqr;
-	if (x >= 0){
-		sqr = board->getSquare(x,y);
-		if (sqr->piece)
-		   if (sqr->piece->getTeam() != this->team){
-			  sqr->active = true;
-			  if (sqr->piece->isKing())
-				  board->setCheck(!this->team);
-		   }
+	int x = position->x;
+	int y = position->y;
+	Square *tmpsqr;
+	int moves = position_first->next ? 1 : 2;
+	for (int i=0; i<moves; i++){
+		y += team == WHITE ? -1 : 1;
+		if ((x>-1 && y>-1) && (x<8 && y<8)){
+			tmpsqr = board->getSquare(x,y);
+			tmpsqr->active = true;
+			if (tmpsqr->piece){
+				if (tmpsqr->piece->getTeam() == this->getTeam())
+					tmpsqr->active = false;
+			}
+		}
 	}
-	x = position->x +1;
-	if (x <= 7){
-		sqr = board->getSquare(x,y);
-		if (sqr->piece)
-		   if (sqr->piece->getTeam() != this->team){
-			  sqr->active = true;
-			  if (sqr->piece->isKing())
-				  board->setCheck(!this->team);
-		   }
+	y = position->y;
+	y += team == WHITE ? -1 : 1;
+	x--;
+	if ((x>-1 && y>-1) && (x<8 && y<8)){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+		}
+		else tmpsqr->active = false;
+	}
+	x+=2;
+	if ((x>-1 && y>-1) && (x<8 && y<8)){
+		tmpsqr = board->getSquare(x,y);
+		tmpsqr->active = true;
+		if (tmpsqr->piece){
+			if (tmpsqr->piece->getTeam() == this->getTeam())
+				tmpsqr->active = false;
+		}
+		else tmpsqr->active = false;
 	}
 }
 Pawn::Pawn(){
 	type = PAWN;
-	hasMoved = false;
 	std::cout<<"Created Pawn!\n";
 }
 

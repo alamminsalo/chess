@@ -15,8 +15,8 @@ BoardGUI::BoardGUI(){
 	}
 
 	gameBoard = new Board();
-	blackteam = gameBoard->getTeam(0);
-	whiteteam = gameBoard->getTeam(1);
+	whiteteam = gameBoard->getTeam(0);
+	blackteam = gameBoard->getTeam(1);
 
 	setup();
 
@@ -134,16 +134,17 @@ void BoardGUI::update(){
 
 void BoardGUI::getInput(){
 	sf::Vector2i mpos = sf::Mouse::getPosition(*this);
-	std::cout<<"Mouse pressed.\n";
 	if (gameBoard->getSelected()){
 		for (int y=0; y<8; y++)
 			for (int x=0; x<8; x++){
-				if (gameBoard->isActiveSquare(x,y) && square[x][y].getGlobalBounds().contains(mpos.x,mpos.y))
-					gameBoard->getSelected()->move(x,y);
+				if (gameBoard->isActiveSquare(x,y) && square[x][y].getGlobalBounds().contains(mpos.x,mpos.y)){
+					gameBoard->moveSelected(x,y);
+					gameBoard->checkPositions();
+				}
 			}
 	}
 	else{
-		if (gameBoard->getTurn() % 2 == 0){		//Valkoisen vuoro siirtää
+		if (gameBoard->getTeam(0)->hasturn){		//Valkoisen vuoro siirtää
 			for (int i=0; i<16; i++){
 				if (whiteButtons[i].getGlobalBounds().contains(mpos.x,mpos.y)){
 					gameBoard->select(whiteteam->piece[i]);
@@ -151,7 +152,7 @@ void BoardGUI::getInput(){
 				}
 			}
 		}
-		else{
+		else if (gameBoard->getTeam(1)->hasturn){	//Mustan vuoro
 			for (int i=0; i<16; i++){
 				if (blackButtons[i].getGlobalBounds().contains(mpos.x,mpos.y)){
 					gameBoard->select(blackteam->piece[i]);
