@@ -12,6 +12,9 @@ class BoardGUI: public sf::RenderWindow{
 		Team *blackteam;
 		Team *whiteteam;
 
+		sf::Text statusText;
+		sf::Font font;
+
 		Board *gameBoard;
 
 		sf::Texture buttontex;

@@ -14,6 +14,12 @@ BoardGUI::BoardGUI(){
 		whiteButtons[i].setTexture(&buttontex);
 	}
 
+	font.loadFromFile("./LemonMilk.otf");
+	statusText.setFont(font);
+	statusText.setCharacterSize(16);
+	statusText.setPosition(0,HEIGHT-16);
+	statusText.setColor(sf::Color::Black);
+
 	gameBoard = new Board();
 	whiteteam = gameBoard->getTeam(0);
 	blackteam = gameBoard->getTeam(1);
@@ -93,8 +99,9 @@ void BoardGUI::run(){
 			if (event.type == sf::Event::Closed)
 				this->close();
 			if (event.type == sf::Event::MouseButtonPressed){
-				if (event.mouseButton.button == sf::Mouse::Left)
+				if (event.mouseButton.button == sf::Mouse::Left){
 					getInput();
+				}
 				if (event.mouseButton.button == sf::Mouse::Right)
 					gameBoard->deselect();
 			}
@@ -107,6 +114,7 @@ void BoardGUI::run(){
 		this->clear();
 
 		draw(background);
+		draw(statusText);
 		for (int y=0; y<8; y++)
 			for (int x=0; x<8; x++)
 				draw(square[x][y]);
@@ -139,7 +147,9 @@ void BoardGUI::getInput(){
 			for (int x=0; x<8; x++){
 				if (gameBoard->isActiveSquare(x,y) && square[x][y].getGlobalBounds().contains(mpos.x,mpos.y)){
 					gameBoard->moveSelected(x,y);
-					gameBoard->checkPositions();
+					if (gameBoard->teamOnCheck())
+						statusText.setString("CHECK");
+					else statusText.setString("");
 				}
 			}
 	}
@@ -167,7 +177,8 @@ void BoardGUI::manage(){
 	for (int y=0; y<8; y++)
 		for (int x=0; x<8; x++){
 			square[x][y].setFillColor(sf::Color::Transparent);
-			if (gameBoard->isActiveSquare(x,y))
+			if (gameBoard->isActiveSquare(x,y)){
 				square[x][y].setFillColor(sf::Color::Green);
+			}
 		}
 }

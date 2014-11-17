@@ -75,7 +75,8 @@ void Board::setupTeamsDefault(){
 }
 
 void Board::select(Piece *piece){
-	//deselect();
+	deselect();
+	std::cout<<"ATTEMPTING TO SELECT "<<piece->getName()<<"\n";
 	if (piece != selected){
 		piece->setActive();		
 		selected = piece;
@@ -111,9 +112,8 @@ int Board::getTurn(){
 	 if (white.hasturn) std::cout<<"White has turn.\n";
  }
 
-bool Board::teamOnCheck(){
-	if (white.oncheck || black.oncheck) return true;
-	return false;
+bool Board::teamOnCheck(bool team){
+	return team ? white.oncheck : black.oncheck;	
 }
 
 void Board::setCheck(unsigned short team){
@@ -126,27 +126,36 @@ void Board::checkPositions(){
 	black.oncheck = white.oncheck = false;
 	for (int i=0; i<16; i++){
 		if (!black.piece[i]->isCaptured()){
-			select(black.piece[i]);
+			black.piece[i]->setActive();
 			if (square[white.piece[15]->getX()][white.piece[15]->getY()].active){
-				white.oncheck = true;
-				std::cout<<"White on check!\n";
+				if (black.piece[i]->getType() == PAWN && black.piece[i]->getX() == white.piece[15]->getX()){}
+				else {
+					white.oncheck = true;
+					//std::cout<<"White on check!\n";
+				}
 			}
 		}
+		
 		if (!white.piece[i]->isCaptured()){
-			select(white.piece[i]);
+			white.piece[i]->setActive();
 			if (square[black.piece[15]->getX()][black.piece[15]->getY()].active){
+				if (white.piece[i]->getType() == PAWN && white.piece[i]->getX() == black.piece[15]->getX()){}
+				else {
 				black.oncheck = true;
-				std::cout<<"Black on check!\n";
+				//std::cout<<"Black on check!\n";
+				}
 			}
 		}
 	}
 }
 
 void Board::moveSelected(int x, int y){
+	std::cout<<"NEW MOVE COMMAND-------------------->\n";
 	Piece *pc = square[x][y].piece ? square[x][y].piece : NULL;
 
 	selected->move(x,y);
 	Piece *tmp_sel = selected;
+	//selected->clearActiveList();
 
 	checkPositions();
 	if (getActiveTeam()->oncheck){
@@ -162,12 +171,13 @@ void Board::moveSelected(int x, int y){
 		switchTurn();
 		std::cout<<"EVALUATING MOVEMENTS----------------->\n";
 		if (evaluateMate() == 1){
-			if (getActiveTeam()->oncheck)
-				std::cout<<"CHECKMATE\nGAME OVER.\n";
+			std::cout<<"\n";
+			std::cout<<"Checkmate or Stalemate!\n";
+			std::cout<<"Game over.\n";
+			std::cout<<"\n";
 		}
 		std::cout<<"-------------------->END OF EVALUATION.\n";
 	}
-	deselect();
 }
 
 int Board::evaluateMate(){
@@ -198,9 +208,8 @@ int Board::evaluateMate(){
 				return 0;
 			}
 			std::cout<<"Next?->";
-			pos = pos->next;
+			pos = pos->next ? pos->next : NULL;
 		}
-		deselect();
 		std::cout<<"NOT FOUND. Deselecting and moving to next piece.\n";
 	}	
 	return 1;

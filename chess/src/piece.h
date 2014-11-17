@@ -28,9 +28,12 @@ protected:
 	Board *board;
 	Position *position_first;
 	Position *position, *pos_back;
+	Position *pos_active_tail, *pos_active_start, *pos_active_current;
 	bool captured;
 	unsigned short team;
 	unsigned short type;
+	void createMovementList();
+	void toActiveList(int,int);
 
 public:
 	Piece();
@@ -47,6 +50,9 @@ public:
 	void revert();
 	virtual void setActive();	
 	unsigned short getType(){return type;};
+	void clearActiveList();
+	Position* getActiveBegin();
+	virtual std::string getName(){return "NOTYPE";};
 };
 
 class Pawn: public Piece{
@@ -54,6 +60,7 @@ public:
 	Pawn();
 	~Pawn(){};
 	void setActive();	
+	std::string getName(){return "PAWN";};
 };
 
 class Rook: public virtual Piece{
@@ -61,6 +68,7 @@ public:
 	Rook();
 	~Rook(){};
 	void setActive();
+	virtual std::string getName(){return "ROOK";};
 };
 
 class Bishop: public virtual Piece{
@@ -68,6 +76,7 @@ public:
 	Bishop();
 	~Bishop(){};
 	virtual void setActive();
+	virtual std::string getName(){return "BISHOP";};
 };
 
 class Knight: public Piece{
@@ -75,6 +84,7 @@ public:
 	Knight();
 	~Knight(){};
 	virtual void setActive();
+	std::string getName(){return "KNIGHT";};
 };
 
 class Queen: public Rook, public Bishop{
@@ -82,6 +92,7 @@ public:
 	Queen();
 	~Queen(){};
 	void setActive();
+	std::string getName(){return "QUEEN";};
 };
 
 class King: public Piece{
@@ -90,6 +101,7 @@ public:
 	~King(){};
 	void setActive();
 	bool isKing(){ return true; };
+	std::string getName(){return "KING";};
 };
 
 #endif

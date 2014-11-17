@@ -35,13 +35,15 @@ public:
 	void switchTurn();
 	int getTurn();
 	void setCheck(unsigned short);
-	bool teamOnCheck(bool);
+	bool teamOnCheck();
 	void checkPositions();
 	void manage();
 	Team* getTeam(unsigned short id){ return id == 0 ? &white : &black; };
 	Team* getActiveTeam(){ return white.hasturn ? &white : &black;};
+	Team* getInactiveTeam(){ return white.hasturn ? &black : &white;};
 	Piece* getSelected(){ return selected; };
 	void moveSelected(int,int);
+	int evaluateMate();
 };
 
 #endif
