@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets sql
 
 SOURCES += main.cpp \
-    startexternal.cpp
+    startexternal.cpp \
+    dbconnector.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,7 +15,8 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    startexternal.h
+    startexternal.h \
+    dbconnector.h
 
 CONFIG += console
 

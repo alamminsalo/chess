@@ -54,7 +54,7 @@ ApplicationWindow {
     TextField {
         id: ip
         x: 174
-        y: 226
+        y: 274
         width: 174
         height: 25
         readOnly: false
@@ -64,7 +64,7 @@ ApplicationWindow {
     TextField {
         id: port
         x: 361
-        y: 226
+        y: 274
         width: 65
         height: 25
         placeholderText: qsTr("")
@@ -73,7 +73,7 @@ ApplicationWindow {
     Text {
         id: text1
         x: 174
-        y: 199
+        y: 247
         width: 27
         height: 15
         text: qsTr("IP")
@@ -84,7 +84,7 @@ ApplicationWindow {
     Text {
         id: text2
         x: 361
-        y: 199
+        y: 247
         width: 27
         height: 15
         text: qsTr("Port")
@@ -95,7 +95,7 @@ ApplicationWindow {
     Button {
         id: button1
         x: 341
-        y: 281
+        y: 329
         text: qsTr("Connect")
         MouseArea{
             anchors.fill: parent
@@ -117,5 +117,21 @@ ApplicationWindow {
             anchors.fill: parent
             onClicked: pageLoader.source = "qrc:/MainView.qml"
         }
+    }
+
+    Text {
+        id: text3
+        x: 174
+        y: 161
+        text: qsTr("Name")
+        font.pixelSize: 12
+    }
+
+    TextField {
+        id: textField1
+        x: 174
+        y: 193
+        text: "Chess King"
+        placeholderText: qsTr("Player Name")
     }
 }

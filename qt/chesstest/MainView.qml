@@ -74,7 +74,7 @@ ApplicationWindow {
     Button {
         id: button2
         x: 254
-        y: 244
+        y: 258
         text: qsTr("Online Game")
         tooltip: "Connect to a server"
         MouseArea{
@@ -105,13 +105,35 @@ ApplicationWindow {
     Button {
         id: button4
         x: 254
-        y: 334
+        y: 376
         width: 92
         height: 27
         text: qsTr("Settings")
         MouseArea{
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
             anchors.fill: parent
             onClicked: pageLoader.source = "qrc:/SettingsView.qml"
+
+        }
+    }
+
+    Button {
+        id: button5
+        x: 254
+        y: 316
+        width: 92
+        height: 27
+        text: qsTr("Scores")
+        MouseArea{
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 0
+            anchors.topMargin: 0
+            anchors.fill: parent
+            onClicked: pageLoader.source = "qrc:/DBView.qml"
 
         }
     }
