@@ -1,8 +1,34 @@
 #include "sfmlboard.h"
 
 BoardGUI::BoardGUI(){
-	this->create(sf::VideoMode(640,640),"CHESS GAME");
 
+	if (!bgtex.loadFromFile("../img/chessboard.gif"))
+			std::cout << "Error loading background file.\n";
+	background.setTexture(&bgtex);
+	background.setSize(sf::Vector2f(640,640));
+
+	buttontex.loadFromFile("../img/buttons.png");
+	for (int i=0; i<16; i++){
+		blackButtons[i].setTexture(&buttontex);
+		whiteButtons[i].setTexture(&buttontex);
+	}
+
+	font.loadFromFile("./LemonMilk.otf");
+	statusText.setFont(font);
+	statusText.setCharacterSize(16);
+	statusText.setPosition(0,HEIGHT-16);
+	statusText.setColor(sf::Color::Blue);
+
+	gameBoard = new Board();
+	whiteteam = gameBoard->getTeam(0);
+	blackteam = gameBoard->getTeam(1);
+
+	player = NULL;
+
+	setup();
+}
+
+BoardGUI::BoardGUI(std::string addr, unsigned short port){
 	if (!bgtex.loadFromFile("../img/chessboard.gif"))
 			std::cout << "Error loading background file.\n";
 	background.setTexture(&bgtex);
@@ -24,15 +50,56 @@ BoardGUI::BoardGUI(){
 	whiteteam = gameBoard->getTeam(0);
 	blackteam = gameBoard->getTeam(1);
 
+	player = NULL;
+
 	setup();
 
-	run();
+	host = sf::IpAddress(addr);
+	this->port = port;
+	connectToServer();
+
+//	sf::Thread thread(&BoardGUI::listenThread,this);
+//	thread.launch();
+}
+
+void BoardGUI::connectToServer(){
+	player = new Player();
+	statusText.setString("CONNECTING...");
+	if (socket.connect(host,port,sf::seconds(10)) != sf::Socket::Done){
+		std::cout<<"Error connecting to server. Closing..\n";
+	}
+	char buf[8];
+	std::size_t bufsize;
+	std::string data;
+	while(true){
+		socket.receive(buf,8,bufsize);
+		data = buf;
+		std::cout<<data;
+		if (data == "black\n"){
+			player->team = blackteam;
+			for (int i=0; i<16; i++)
+				player->buttons[i] = &blackButtons[i];
+			std::cout<<"Received: "<<data;
+			break;
+		}
+		else if (data =="white\n"){
+			player->team = whiteteam;
+			for (int i=0; i<16; i++)
+				player->buttons[i] = &whiteButtons[i];
+			std::cout<<"Received: "<<data;
+			break;
+		}
+	}
+	data.clear();
+	statusText.setString("OK");
+
 }
 
 BoardGUI::~BoardGUI(){
 }
 
 void BoardGUI::setup(){
+	this->create(sf::VideoMode(640,640),"CHESS GAME");
 	for (int y=0; y<8; y++)
 		for (int x=0; x<8; x++){
 			square[x][y].setFillColor(sf::Color::Transparent);
@@ -92,9 +159,8 @@ void BoardGUI::setup(){
 }
 
 void BoardGUI::run(){
-	sf::Event event;
 	while (this->isOpen()){
-
+		sf::Event event;
 		while(this->pollEvent(event)){
 			if (event.type == sf::Event::Closed)
 				this->close();
@@ -111,7 +177,7 @@ void BoardGUI::run(){
 
 		update();
 
-		this->clear();
+		clear();
 
 		draw(background);
 		draw(statusText);
@@ -124,6 +190,11 @@ void BoardGUI::run(){
 		}
 
 		this->display();
+
+		if (player){
+			if (!player->team->hasturn)
+				getMoveFromServer();
+		}
 	}
 }
 
@@ -143,17 +214,21 @@ void BoardGUI::update(){
 void BoardGUI::getInput(){
 	sf::Vector2i mpos = sf::Mouse::getPosition(*this);
 	if (gameBoard->getSelected()){
+		int bX = gameBoard->getSelected()->getX();
+		int bY = gameBoard->getSelected()->getY();
 		for (int y=0; y<8; y++)
 			for (int x=0; x<8; x++){
 				if (gameBoard->isActiveSquare(x,y) && square[x][y].getGlobalBounds().contains(mpos.x,mpos.y)){
-					gameBoard->moveSelected(x,y);
-					if (gameBoard->teamOnCheck())
-						statusText.setString("CHECK");
-					else statusText.setString("");
+					if (player){
+						if (gameBoard->moveSelected(x,y) == 0){
+							postMoveToServer(bX,bY,x,y);
+						}
+					}
+					else gameBoard->moveSelected(x,y);
 				}
 			}
 	}
-	else{
+	else if (!player){								//LOKAALI PELI
 		if (gameBoard->getTeam(0)->hasturn){		//Valkoisen vuoro siirtää
 			for (int i=0; i<16; i++){
 				if (whiteButtons[i].getGlobalBounds().contains(mpos.x,mpos.y)){
@@ -171,6 +246,13 @@ void BoardGUI::getInput(){
 			}
 		}
 	}
+	else if (player->team->hasturn){			//TCP_PELI
+		for (int i=0; i<16; i++){
+			if (player->buttons[i]->getGlobalBounds().contains(mpos.x,mpos.y)){
+				gameBoard->select(player->team->piece[i]);
+			}
+		}
+	}
 }
 
 void BoardGUI::manage(){
@@ -181,4 +263,52 @@ void BoardGUI::manage(){
 				square[x][y].setFillColor(sf::Color::Green);
 			}
 		}
+	if (gameBoard->teamOnCheck())
+		statusText.setString("CHECK");
+	else statusText.setString("");
 }
+
+void BoardGUI::postMoveToServer(int bx,int by,int x,int y){
+	char buf[6] = {(char)(bx+48),(char)(by+48),(char)(x+48),(char)(y+48),'\n'};
+	std::cout<<buf<<std::endl;
+	socket.send(buf,6);
+}
+
+void BoardGUI::getMoveFromServer(){
+	statusText.setString("Waiting for opponent's move..");
+	int bx,by,x,y;
+	char buf[5];
+	std::size_t datasize;
+
+	socket.receive(buf,5,datasize);
+	std::cout<<buf;
+
+	bx = (int)buf[0]-48;
+	by = (int)buf[1]-48;
+	x = (int)buf[2]-48;
+	y = (int)buf[3]-48;
+	
+	if (gameBoard->selectPieceAt(bx,by))
+		gameBoard->moveSelected(x,y);
+
+	statusText.setString("");
+}
+
+void BoardGUI::listenThread(){
+	sf::Clock timer;
+	while(this->isOpen()){
+		if (timer.getElapsedTime().asSeconds() > 1){
+			if (!player->team->hasturn)
+				getMoveFromServer();
+			timer.restart();
+		}
+	}
+}
+
+
+
+
+
+
+
+

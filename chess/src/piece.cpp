@@ -56,7 +56,7 @@ void Piece::clearActiveList(){
 		delete pos_active_start;
 	}	
 	pos_active_start = pos_active_tail = pos_active_current = NULL;
-	std::cout<<"Cleared active movement list!\n";
+	//std::cout<<"Cleared active movement list!\n";
 }
 
 void Piece::toActiveList(int x, int y){
@@ -99,36 +99,28 @@ void Piece::setup(int x, int y, Board *b){
 }
 
 void Piece::move(int x,int y){
-	std::cout<<"::MOVE START.::\n";
-	std::cout<<"-->TARGET SQUARE AT "<<x<<", "<<y<<"\n";
+	std::cout<<"Moving "<<getName()<<": "<<position->x<<","<<position->y<<" -> "<<x<<","<<y<<std::endl;
 	if (board->getSquare(x,y)->piece){
-		std::cout<<"-->CAPTURING PIECE..."<<board->getSquare(x,y)->piece->getName()<<"\n";
 		board->getSquare(x,y)->piece->setCaptured(true);
-		std::cout<<"-->PIECE CAPTURED\n";
 	}
-	std::cout<<"-->SETTING SELECTED SQUARE NULL\n";
 	board->getSquare(position->x,position->y)->piece = NULL;
 	pos_back = position;
 
-	std::cout<<"-->CREATING NEW POSITION...";
 	position->next = new Position();
 	position = position->next;
 	position->x = x; 
 	position->y = y;
 	position->turn = board->getTurn();
 	position->next = NULL;
-	std::cout<<"DONE.\n";
 
-	std::cout<<"-->SETTING SELECTED SQUARE TO THIS PIECE\n";
-	board->getSquare(position->x,position->y)->piece = this;
-	std::cout<<"::MOVE END.::\n";
+	board->getSquare(x,y)->piece = this;
 	//std::cout<<"piece at: "<<position->x<<","<<position->y<<"\n";
 //	board->deselect();
 //	board->switchTurn();
 }
 
 void Pawn::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	int x = position->x;
 	int y = position->y;
 	Square *tmpsqr;
@@ -190,7 +182,7 @@ King::King(){
 }
 
 void Bishop::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	Square *tmpsqr;
 	for (int y=position->y-1, x=position->x-1; x>-1 && y>-1; x--,y--){
 		tmpsqr = board->getSquare(x,y);
@@ -235,7 +227,7 @@ void Bishop::setActive(){
 }
 
 void Knight::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	Square *tmpsqr;
 	int x, y;
 	for (int i=0; i<8; i++){
@@ -280,7 +272,7 @@ void Knight::setActive(){
 }
 
 void Rook::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	Square *tmpsqr;
 	for (int y=position->y, x=position->x-1; x>-1; x--){
 		tmpsqr = board->getSquare(x,y);
@@ -325,13 +317,13 @@ void Rook::setActive(){
 }
 
 void Queen::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	Rook::setActive();
 	Bishop::setActive();	
 }
 
 void King::setActive(){
-	std::cout<<"Selected "<<getName()<<std::endl;
+	//std::cout<<"Selected "<<getName()<<std::endl;
 	int x = position->x;
 	int y = position->y;
 	Square *tmpsqr;

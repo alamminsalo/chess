@@ -5,10 +5,20 @@
 #define HEIGHT 640
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 #include "board.h"
+
+struct Player{
+	Team *team;
+	sf::RectangleShape *buttons[16];	
+};
 
 class BoardGUI: public sf::RenderWindow{
 	protected:
+		sf::TcpSocket socket;
+		sf::IpAddress host;
+		unsigned short port;
+
 		Team *blackteam;
 		Team *whiteteam;
 
@@ -26,15 +36,23 @@ class BoardGUI: public sf::RenderWindow{
 
 		sf::RectangleShape square[8][8];
 
+		Player *player;
+
 		void setup();
-		void run();
 		void update();
 		void getInput();
 		void manage();
+		bool socketOn;
+		void connectToServer();
+		void getMoveFromServer();
+		void postMoveToServer(int,int,int,int);
+		void listenThread();
 
 	public:
 		BoardGUI();
+		BoardGUI(std::string,unsigned short);
 		~BoardGUI();
+		void run();
 };
 
 #endif

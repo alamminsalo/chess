@@ -29,6 +29,7 @@ public:
 	~Board();
 	void reset();
 	void select(Piece*);
+	bool selectPieceAt(int,int);
 	void deselect();
 	bool isActiveSquare(int,int);
 	Square* getSquare(int,int);
@@ -42,7 +43,7 @@ public:
 	Team* getActiveTeam(){ return white.hasturn ? &white : &black;};
 	Team* getInactiveTeam(){ return white.hasturn ? &black : &white;};
 	Piece* getSelected(){ return selected; };
-	void moveSelected(int,int);
+	int moveSelected(int,int);
 	int evaluateMate();
 };
 
