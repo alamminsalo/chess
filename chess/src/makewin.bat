@@ -1,6 +1,6 @@
 g++ -c *.cpp -IC:\SFML-2.1\include
 
-g++ *.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system
+g++ *.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
 
 mkdir chessBuildWin
 mkdir chessBuildWin\bin
@@ -12,6 +12,8 @@ copy ..\img\chessboard.gif .\chessBuildWin\img\
 move sfml-app.exe .\chessBuildWin\bin
 
 copy C:\SFML-2.1\bin\sfml-audio-2.dll .\chessBuildWin\bin
+
+copy C:\SFML-2.1\bin\sfml-network-2.dll .\chessBuildWin\bin
 
 copy C:\SFML-2.1\bin\sfml-window-2.dll .\chessBuildWin\bin
 
