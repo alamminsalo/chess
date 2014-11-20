@@ -10,7 +10,7 @@ mkdir chessBuildWin\img
 
 copy ..\img\buttons.png .\chessBuildWin\img\
 copy ..\img\chessboard.gif .\chessBuildWin\img\
-copy LemonMilk.otf .\chessBuildWin
+copy LemonMilk.otf .\chessBuildWin\bin
 
 move sfml-app.exe .\chessBuildWin\bin
 
