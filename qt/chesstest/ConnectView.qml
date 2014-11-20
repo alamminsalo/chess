@@ -100,7 +100,7 @@ ApplicationWindow {
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                gameview.start(ip.text+":"+port.text);
+                gameview.start([ip.text,port.text]);
                 Qt.quit();
             }
         }

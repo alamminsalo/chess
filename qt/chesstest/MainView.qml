@@ -64,7 +64,7 @@ ApplicationWindow {
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                gameview.start("local");
+                gameview.start();
                 Qt.quit();
             }
 

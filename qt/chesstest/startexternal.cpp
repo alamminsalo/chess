@@ -10,9 +10,16 @@ StartExternal::StartExternal(QObject *parent) :
 }
 
 void StartExternal::start(QStringList args){
-    std::cout << "Arguments: "+args.first().toStdString() << std::endl;
+    std::cout << "Arguments: "+args.first().toStdString() << args.last().toStdString() << std::endl;
     QString url = "./sfml-app";
-    if(process->startDetached(url,args))
+    if (process->startDetached(url,args))
+        std::cout << "Success!\n";
+}
+
+void StartExternal::start(){
+    std::cout << "Starting with no args..\n";
+    QString url = "./sfml-app";
+    if (process->startDetached(url))
         std::cout << "Success!\n";
 }
 

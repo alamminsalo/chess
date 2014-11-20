@@ -9,8 +9,6 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-
     qmlRegisterType<StartExternal>("StartExternal", 1, 0, "StartExternal");
     qmlRegisterType<DBConnector>("SqlConnector", 1, 0, "SqlConnector");
 
