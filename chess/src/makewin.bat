@@ -1,3 +1,5 @@
+del *.o
+
 g++ -c *.cpp -IC:\SFML-2.1\include
 
 g++ *.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
@@ -8,6 +10,7 @@ mkdir chessBuildWin\img
 
 copy ..\img\buttons.png .\chessBuildWin\img\
 copy ..\img\chessboard.gif .\chessBuildWin\img\
+copy LemonMilk.otf .\chessBuildWin
 
 move sfml-app.exe .\chessBuildWin\bin
 
