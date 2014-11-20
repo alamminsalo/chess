@@ -228,7 +228,7 @@ void BoardGUI::getInput(){
 		int bY = gameBoard->getSelected()->getY();
 		for (int y=0; y<8; y++)
 			for (int x=0; x<8; x++){
-				if (gameBoard->isActiveSquare(x,y) && square[x][y].getGlobalBounds().contains(mpos.x,mpos.y)){
+				if (square[x][y].getGlobalBounds().contains(mpos.x,mpos.y)){
 					if (player){
 						if (gameBoard->moveSelected(x,y) == 0){
 							postMoveToServer(bX,bY,x,y);

@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ConnectView.qml</file>
-        <file>MainView.qml</file>
-        <file>Loader.qml</file>
-        <file>SettingsView.qml</file>
-        <file>DBView.qml</file>
-    </qresource>
-</RCC>

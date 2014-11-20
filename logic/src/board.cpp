@@ -173,6 +173,10 @@ int Board::simulateMove(Piece *simulated,int x,int y){
 }
 
 int Board::moveSelected(int x, int y){
+	if (!square[x][y].active){
+		std::cout<<"Error: You cant move this piece here.\n";
+		return -1;
+	}
 	Piece *tmp_sel = selected;
 	if (simulateMove(selected,x,y) == 0){
 		tmp_sel->move(x,y);
