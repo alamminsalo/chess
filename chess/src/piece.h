@@ -26,14 +26,14 @@ struct Position{
 class Piece{
 protected:
 	Board *board;
-	Position *position_first;
-	Position *position, *pos_back;
-	Position *pos_active_tail, *pos_active_start, *pos_active_current;
+	Position *position_root, *position;
+	Position *active_root, *active;
 	bool captured;
 	unsigned short team;
 	unsigned short type;
-	void createMovementList();
-	void toActiveList(int,int);
+
+	void addPosition(int,int);
+	void addActive(int,int);
 
 public:
 	Piece();
@@ -42,16 +42,16 @@ public:
 	void move(int,int);
 	void setTeam(unsigned short s){ team = s; };
 	unsigned short getTeam(){ return team; }; 
+	Position* getActivePositionRoot();
+	void clearActiveList();
 	void setCaptured(bool b){ captured = b; };
 	bool isCaptured(){ return captured; };
 	int getX(){return position->x;};
 	int getY(){return position->y;};
 	virtual bool isKing(){ return false; };
 	void revert();
-	virtual void setActive();	
+	virtual void setActive(){};
 	unsigned short getType(){return type;};
-	void clearActiveList();
-	Position* getActiveBegin();
 	virtual std::string getName(){return "NOTYPE";};
 };
 

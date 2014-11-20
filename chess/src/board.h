@@ -4,7 +4,13 @@
 #include <iostream>
 #include "piece.h"
 
+#define STATUS_NOCHECK 0
+#define STATUS_CHECK 1
+#define STATUS_CHECKMATE 2
+#define STATUS_STALEMATE 3
+
 class Piece;
+struct Position;
 
 struct Square{
 	bool active;
@@ -23,7 +29,10 @@ protected:
 	Square square[8][8];
 	Piece *selected;
 	int turns;
+	int status;
 	void setupTeamsDefault();
+	Position* getActiveList(Piece*);
+	void deleteActiveList(Position*);
 public:
 	Board();
 	~Board();
@@ -35,16 +44,16 @@ public:
 	Square* getSquare(int,int);
 	void switchTurn();
 	int getTurn();
-	void setCheck(unsigned short);
 	bool teamOnCheck();
-	void checkPositions();
-	void manage();
+	void checkForMate();
+	int simulateMove(Piece*,int x, int y);
 	Team* getTeam(unsigned short id){ return id == 0 ? &white : &black; };
 	Team* getActiveTeam(){ return white.hasturn ? &white : &black;};
 	Team* getInactiveTeam(){ return white.hasturn ? &black : &white;};
 	Piece* getSelected(){ return selected; };
 	int moveSelected(int,int);
 	int evaluateMate();
+	int getStatus(){ return status;};
 };
 
 #endif

@@ -19,6 +19,7 @@ Board::~Board(){
 }
 
 void Board::reset(){
+	status = STATUS_NOCHECK;
 	for (int y=0; y < 8; y++)
 		for (int x=0; x < 8; x++){
 			square[x][y].active = false;	
@@ -77,8 +78,8 @@ void Board::setupTeamsDefault(){
 void Board::select(Piece *piece){
 	if (piece != selected){
 		deselect();
-		piece->setActive();		
 		selected = piece;
+		piece->setActive();		
 	}
 }
 
@@ -91,8 +92,6 @@ bool Board::selectPieceAt(int x, int y){
 }
 
 void Board::deselect(){
-	if (selected)
-		selected->clearActiveList();
 	selected = NULL;
 	for (int y=0; y < 8; y++)
 		for (int x=0; x < 8; x++)
@@ -111,112 +110,148 @@ int Board::getTurn(){
 	return turns;
 }
  void Board::switchTurn(){
-	 turns++;
-	 black.hasturn = !black.hasturn;
-	 white.hasturn = !white.hasturn;
+	turns++;
+	black.hasturn = !black.hasturn;
+	white.hasturn = !white.hasturn;
 
-	 if (black.hasturn) std::cout<<"Black has turn.\n";
-	 if (white.hasturn) std::cout<<"White has turn.\n";
+	switch (evaluateMate()){
+		case 1:
+			std::cout<<"Checkmate!\n";
+			break;
+		case 2:
+			std::cout<<"Stalemate!\n";
+			break;
+		default:
+			if (black.hasturn) std::cout<<"Black has turn.\n";
+			else std::cout<<"White has turn.\n";
+	}
  }
 
 bool Board::teamOnCheck(){
-	if (white.oncheck || black.oncheck) return true;
-	return false;
+	return (white.oncheck || black.oncheck) ? true : false;
 }
 
-void Board::setCheck(unsigned short team){
-	if (team == 0)
-		white.oncheck = true;
-	else black.oncheck = true;
-}
-
-void Board::checkPositions(){
-	black.oncheck = white.oncheck = false;
-	int x, y;
+void Board::checkForMate(){
+	getActiveTeam()->oncheck = false;	
 	for (int i=0; i<16; i++){
-		if (!black.piece[i]->isCaptured()){
-			select(black.piece[i]);
-			x = white.piece[15]->getX();
-			y = white.piece[15]->getY();
-			if (square[x][y].active){
-				white.oncheck = true;
-				std::cout<<"White on check!\n";
-			}
-		}
-		if (!white.piece[i]->isCaptured()){
-			select(white.piece[i]);
-			x = black.piece[15]->getX();
-			y = black.piece[15]->getY();
-			if (square[x][y].active){
-				black.oncheck = true;
-				std::cout<<"Black on check!\n";
-			}
-		}
-	//	if (!getInactiveTeam()->piece[i]->isCaptured()){
-	//		select(getInactiveTeam()->piece[i]);
-	//		if (square[getActiveTeam()->piece[15]->getX()][getActiveTeam()->piece[15]->getY()].active){
-	//			getActiveTeam()->oncheck = true;
-	//			return;
-	//		}
-	//	}
+		if (getInactiveTeam()->piece[i])
+			if (!getInactiveTeam()->piece[i]->isCaptured())
+				getInactiveTeam()->piece[i]->setActive();
 	}
+	if (square[getActiveTeam()->piece[15]->getX()][getActiveTeam()->piece[15]->getY()].active){
+		getActiveTeam()->oncheck = true;
+	}
+	deselect();
+}
+
+int Board::simulateMove(Piece *simulated,int x,int y){
+	std::cout<<"Simulation: "<<simulated->getName()<<" TO ["<<x<<","<<y<<"]\n";
+	deselect();
+	Piece *pc = square[x][y].piece;
+
+	simulated->move(x,y);
+
+	checkForMate();
+	std::cout<<"\t";
+	simulated->revert();
+	if (pc){
+		square[x][y].piece = pc;
+		square[x][y].piece->setCaptured(false);
+	}
+	std::cout<<"\t";
+	if (getActiveTeam()->oncheck){
+		std::cout<<"Move not legal\n";
+		return -1;
+	}
+	std::cout<<"Move is legal\n";
+	return 0;
 }
 
 int Board::moveSelected(int x, int y){
-	Piece *pc = square[x][y].piece ? square[x][y].piece : NULL;
-
-	selected->move(x,y);
 	Piece *tmp_sel = selected;
-
-	checkPositions();
-	if (getActiveTeam()->oncheck){
-		std::cout<<"ERROR: Move puts this team on check.\n";	
-		tmp_sel->revert();
-		if (pc){
-			square[x][y].piece = pc;
-			square[x][y].piece->setCaptured(false);
-		}
-		deselect();
-		return -1;
-	}
-	else{
+	if (simulateMove(selected,x,y) == 0){
+		tmp_sel->move(x,y);
 		switchTurn();
-		//if (evaluateMate() == 1){
-		//	std::cout<<"CHECKMATE\nGAME OVER.\n";
-		//}
-		deselect();
+	}
+	else {
+		std::cout<<"Error: Move puts this team on check.\n";
+		return -1;
 	}
 	return 0;
 }
 
 int Board::evaluateMate(){
+	checkForMate();
+	bool teamoncheck = getActiveTeam()->oncheck;
+	Position *pos, *root;
 	for (int i=0; i<16; i++){
-		select(getActiveTeam()->piece[i]);
-		Position *pos = selected->getActiveBegin();
-		//std::cout<<"Evaluating legal moves for piece "<<i<<"...";
-		//std::cout<<selected->getName()<<std::endl;
-		std::cout<<"Simulating piece["<<i<<"]: "<<selected->getName()<<" at "<<selected->getX()<<","<<selected->getY()<<std::endl;
-		while (pos){
-			int x = pos->x; 
-			int y = pos->y;
-			Piece *pc = square[x][y].piece ? square[x][y].piece : NULL;
-			selected->move(x,y);
-			Piece *tmp_sel = selected;
-			checkPositions();
-			tmp_sel->revert();
-			if (pc){
-				square[x][y].piece = pc;
-				square[x][y].piece->setCaptured(false);
+		if (!getActiveTeam()->piece[i]->isCaptured()){
+			root = pos = getActiveList(getActiveTeam()->piece[i]); 
+			while (pos){
+				if (simulateMove(getActiveTeam()->piece[i],pos->x,pos->y) == 0){
+					getActiveTeam()->oncheck = teamoncheck;
+					return 0;
+				}
+				if (!pos->next)
+					break;
+				pos = pos->next;
 			}
-			if (!getActiveTeam()->oncheck){
-				std::cout<<"\tFound possible move.\n";
-				return 0;
-			}
-			else std::cout<<"\t...\n";
-			pos = pos->next;
+			std::cout<<"Arrived to end of list\n";
+			deleteActiveList(pos);
+			//getActiveTeam()->piece[i]->clearActiveList();
 		}
-		std::cout<<"Next piece:\n";
 	}	
-	return 1;
+	getActiveTeam()->oncheck = teamoncheck;
+	return teamoncheck ? 1 : 2;
+}
+
+Position* Board::getActiveList(Piece *pc){
+	select(pc);
+	Position *head = NULL;
+	Position *tail;
+	std::cout<<pc->getName()<<":";
+
+	for (int y=0; y<8; y++){
+		for (int x=0; x<8; x++){
+			if (square[x][y].active){
+				if (!head){
+					head = new Position;
+					head->x = x;
+					head->y = y;
+					head->next = NULL;
+					tail = head;
+				}
+				else{
+					tail->next = new Position;
+					tail->next->x = x;
+					tail->next->y = y;
+					tail = tail->next;
+					tail->next = NULL;
+				}
+				std::cout<<" -> ["<<x<<","<<y<<"]";
+			}
+		}
+	}
+	Position *tmp = head;
+	while (tmp){
+		std::cout<<"lap";
+		if (tmp->next)
+			tmp = tmp->next;
+		else break;
+	}
+	if (!head)
+		std::cout<<"No possible moves";
+	std::cout<<std::endl;
+	return head;
+}
+
+void Board::deleteActiveList(Position *root){
+	Position *tmp;
+	while(root){
+		tmp = root;	
+		root = root->next;
+		delete tmp;
+	}	
+	std::cout<<"Deleted linked list!\n";
 }
 

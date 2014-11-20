@@ -100,6 +100,7 @@ BoardGUI::~BoardGUI(){
 
 void BoardGUI::setup(){
 	this->create(sf::VideoMode(640,640),"CHESS GAME");
+	this->setFramerateLimit(30);
 	for (int y=0; y<8; y++)
 		for (int x=0; x<8; x++){
 			square[x][y].setFillColor(sf::Color::Transparent);
@@ -213,6 +214,15 @@ void BoardGUI::update(){
 
 void BoardGUI::getInput(){
 	sf::Vector2i mpos = sf::Mouse::getPosition(*this);
+
+	//DEBUGGING..
+	for (int y=0; y<8;y++)
+		for (int x=0;x<8;x++)
+			if (square[x][y].getGlobalBounds().contains(mpos.x,mpos.y) && gameBoard->getSquare(x,y)->piece){
+				Piece *piece = gameBoard->getSquare(x,y)->piece;
+				std::cout<<"DEBUG: piece "<<piece->getName()<<", "<<(piece->getTeam() == 0 ? "WHITE" : "BLACK")<<" at "<<piece->getX()<<","<<piece->getY()<<" is "<<(piece->isCaptured() ? "CAPTURED" : "NOT CAPTURED")<<std::endl;
+			}
+
 	if (gameBoard->getSelected()){
 		int bX = gameBoard->getSelected()->getX();
 		int bY = gameBoard->getSelected()->getY();
