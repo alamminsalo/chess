@@ -273,9 +273,20 @@ void BoardGUI::manage(){
 				square[x][y].setFillColor(sf::Color::Green);
 			}
 		}
-	if (gameBoard->teamOnCheck())
-		statusText.setString("CHECK");
-	else statusText.setString("");
+	switch (gameBoard->getStatus()){
+		case STATUS_NOCHECK:
+			statusText.setString("");
+			break;
+		case STATUS_CHECK:
+			statusText.setString("CHECK");
+			break;
+		case STATUS_CHECKMATE:
+			statusText.setString("CHECKMATE");
+			break;
+		case STATUS_STALEMATE:
+			statusText.setString("STALEMATE");
+			break;
+	}
 }
 
 void BoardGUI::postMoveToServer(int bx,int by,int x,int y){

@@ -116,12 +116,17 @@ int Board::getTurn(){
 
 	switch (evaluateMate()){
 		case 1:
+			status = STATUS_CHECKMATE;
 			std::cout<<"Checkmate!\n";
 			break;
 		case 2:
+			status = STATUS_STALEMATE;
 			std::cout<<"Stalemate!\n";
 			break;
 		default:
+			if (teamOnCheck())
+				status = STATUS_CHECK;
+			else status = STATUS_NOCHECK;
 			if (black.hasturn) std::cout<<"Black has turn.\n";
 			else std::cout<<"White has turn.\n";
 	}
