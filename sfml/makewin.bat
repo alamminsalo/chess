@@ -2,7 +2,7 @@ del *.o
 
 g++ -c main.cpp sfmlboard.cpp ../logic/src/board.cpp ../logic/src/piece.cpp -IC:\SFML-2.1\include
 
-g++ main.o sfmlboard.o ../logic/src/board.o ../logic/src/piece.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
+g++ *.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
 
 mkdir chessBuildWin
 mkdir chessBuildWin\bin
@@ -10,7 +10,7 @@ mkdir chessBuildWin\img
 
 copy ..\img\buttons.png .\chessBuildWin\img\
 copy ..\img\chessboard.gif .\chessBuildWin\img\
-copy LemonMilk.otf .\chessBuildWin\bin
+copy ..\logic\src\LemonMilk.otf .\chessBuildWin\bin
 
 move sfml-app.exe .\chessBuildWin\bin
 
