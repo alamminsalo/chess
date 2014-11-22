@@ -5,7 +5,7 @@ Board::Board(){
 	white.oncheck = false;
 	black.hasturn = false;
 	white.hasturn = true;
-	std::cout<<"Created board.\n";
+    //std::cout<<"Created board.\n";
 	selected = NULL;
 	reset();	
 }
@@ -15,7 +15,7 @@ Board::~Board(){
 		delete black.piece[i];
 		delete white.piece[i];
 	}
-	std::cout<<"Deleted board.\n";
+    //std::cout<<"Deleted board.\n";
 }
 
 void Board::reset(){
@@ -26,8 +26,8 @@ void Board::reset(){
 			square[x][y].piece = NULL;
 		}
 	setupTeamsDefault();
-	std::cout<<"Set up teams.\n";
-	std::cout<<"White has turn\n";
+    //std::cout<<"Set up teams.\n";
+    //std::cout<<"White has turn\n";
 }
 
 void Board::setupTeamsDefault(){
@@ -72,6 +72,9 @@ void Board::setupTeamsDefault(){
 		}
 		white.piece[i]->setTeam(0);
 		black.piece[i]->setTeam(1);
+
+        white.id = 0;
+        black.id = 1;
 	}
 }
 
@@ -84,9 +87,11 @@ void Board::select(Piece *piece){
 }
 
 bool Board::selectPieceAt(int x, int y){
-	if (square[x][y].piece){	
-		select(square[x][y].piece);
-		return true;
+    if (square[x][y].piece){
+        if (square[x][y].piece->getTeam() == getActiveTeam()->id){
+            select(square[x][y].piece);
+            return true;
+        }
 	}
 	return false;
 }
@@ -127,8 +132,8 @@ int Board::getTurn(){
 			if (teamOnCheck())
 				status = STATUS_CHECK;
 			else status = STATUS_NOCHECK;
-			if (black.hasturn) std::cout<<"Black has turn.\n";
-			else std::cout<<"White has turn.\n";
+            //if (black.hasturn) std::cout<<"Black has turn.\n";
+            //else std::cout<<"White has turn.\n";
 	}
  }
 
@@ -240,13 +245,6 @@ Position* Board::getActiveList(Piece *pc){
 				std::cout<<" -> ["<<x<<","<<y<<"]";
 			}
 		}
-	}
-	Position *tmp = head;
-	while (tmp){
-		std::cout<<"lap";
-		if (tmp->next)
-			tmp = tmp->next;
-		else break;
 	}
 	if (!head)
 		std::cout<<"No possible moves";

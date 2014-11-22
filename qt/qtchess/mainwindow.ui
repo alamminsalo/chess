@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>430</width>
-    <height>360</height>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,10 @@
       <height>341</height>
      </rect>
     </property>
-    <widget class="QWidget" name="main">
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="main_page">
      <widget class="QPushButton" name="main_quit">
       <property name="geometry">
        <rect>
@@ -40,7 +43,7 @@
        <string>Quit</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -93,7 +96,7 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="connect">
+    <widget class="QWidget" name="connect_page">
      <widget class="QPushButton" name="connect_connect">
       <property name="geometry">
        <rect>
@@ -134,6 +137,9 @@
       </property>
       <property name="statusTip">
        <string>Server IP address or domain</string>
+      </property>
+      <property name="text">
+       <string>localhost</string>
       </property>
       <property name="maxLength">
        <number>100</number>
@@ -223,7 +229,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="settings">
+    <widget class="QWidget" name="settings_page">
      <widget class="QPushButton" name="settings_ok">
       <property name="geometry">
        <rect>
@@ -305,8 +311,8 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="search">
-     <widget class="QPushButton" name="pushButton">
+    <widget class="QWidget" name="search_page">
+     <widget class="QPushButton" name="search_back">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -391,7 +397,7 @@
        </property>
       </item>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="search_search">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -405,9 +411,56 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="game_page">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>430</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="actionDisconnect"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -424,11 +477,11 @@
   <tabstop>connect_name</tabstop>
   <tabstop>comboBox</tabstop>
   <tabstop>checkBox</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>search_back</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>tableView</tabstop>
   <tabstop>comboBox_2</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>search_search</tabstop>
   <tabstop>settings_ok</tabstop>
  </tabstops>
  <resources/>

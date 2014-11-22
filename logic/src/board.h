@@ -18,6 +18,7 @@ struct Square{
 };
 
 struct Team{
+    int id;
 	bool oncheck, hasturn;
 	Piece *piece[16];
 };

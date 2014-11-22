@@ -15,7 +15,7 @@ Piece::~Piece(){
 }
 
 void Piece::revert(){
-	board->getSquare(position->x,position->y)->piece = NULL;
+    board->getSquare(position->x,position->y)->piece = NULL;
 
 	Position *pos_back = position_root;
 	while (pos_back->next != position)
@@ -34,6 +34,8 @@ void Piece::setup(int x, int y, Board *b){
 	position->x = x;
 	position->y = y;	
 	position_root = position;
+
+    position->next = NULL;
 
 	board = b;
 	board->getSquare(x,y)->piece = this;
@@ -98,7 +100,7 @@ void Pawn::setActive(){
 	int x = position->x;
 	int y = position->y;
 	Square *tmpsqr;
-	int moves = position_root->next ? 1 : 2;
+    int moves = (position_root->next) ? 1 : 2;
 	for (int i=0; i<moves; i++){
 		y += team == WHITE ? -1 : 1;
 		if ((x>-1 && y>-1) && (x<8 && y<8)){
