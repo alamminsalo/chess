@@ -7,7 +7,7 @@ GameView::GameView()
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setScene(&scene);
 
-    bgtex.load("img/chessboard.gif");
+    bgtex.load("img/chessboard.png");
     this->setBackgroundBrush(bgtex.scaled(640,640));
     scene.setSceneRect(0,0,640,640);
     this->setCacheMode(QGraphicsView::CacheBackground);

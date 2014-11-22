@@ -2,7 +2,7 @@
 
 BoardGUI::BoardGUI(){
 
-	if (!bgtex.loadFromFile("../img/chessboard.gif"))
+	if (!bgtex.loadFromFile("../img/chessboard.png"))
 			std::cout << "Error loading background file.\n";
 	background.setTexture(&bgtex);
 	background.setSize(sf::Vector2f(640,640));
