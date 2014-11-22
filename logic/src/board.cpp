@@ -211,7 +211,7 @@ int Board::evaluateMate(){
 				pos = pos->next;
 			}
 			std::cout<<"Arrived to end of list\n";
-			deleteActiveList(pos);
+            deleteActiveList(root);
 			//getActiveTeam()->piece[i]->clearActiveList();
 		}
 	}	

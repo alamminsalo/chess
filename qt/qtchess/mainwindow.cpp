@@ -70,10 +70,10 @@ void MainWindow::disconnectTriggered()
 {
     changeStatus();
     gameRunning = false;
+    ui->connect_connect->setEnabled(true);
     ui->stackedWidget->setCurrentWidget(ui->connect_page);
     resetSize();
     delete gameview;
-    ui->connect_connect->setEnabled(true);
 }
 
 void MainWindow::closeTriggered(){
