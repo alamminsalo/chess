@@ -50,8 +50,6 @@ class GameView : public QGraphicsView
     void update();
     void getInput();
     void manage();
-    //bool socketOn;
-
     void listenThread();
     void mousePressEvent ( QMouseEvent * event );
 
@@ -59,7 +57,6 @@ class GameView : public QGraphicsView
 public:
     GameView();
     ~GameView();
-    void run();
     QString getStatus(){ return statusstr; }
     void connectToServer(QString,qint16);
     void closeConnection();

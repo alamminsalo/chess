@@ -46,70 +46,17 @@ void GameView::connectToServer(QString addr, qint16 port){
     QHostAddress host;
     host.setAddress(addr);
     socket = new QTcpSocket(this);
-    connect(socket,SIGNAL(readyRead()),this,SLOT(readData()));
+
     connect(socket,SIGNAL(connected()),this,SLOT(initConnection()));
+    connect(socket,SIGNAL(readyRead()),this,SLOT(readData()));
     connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(failedConnection()));
 
     socket->connectToHost(addr,port);
-    /*if (socket->waitForConnected(10000)){
-        player = new Player;
-        char buf[8];
-        qint16 datasize;
-        std::string data;
-        while(true){
-            datasize = socket->read(buf,8);
-            if (datasize > 0){
-                data = buf;
-                if (data == "black\n"){
-                    player->team = blackteam;
-                    for (int i=0; i<16; i++)
-                        player->buttons[i] = &blackButtons[i];
-                    std::cout<<"Received: "<<data;
-                    break;
-                }
-                else if (data =="white\n"){
-                    player->team = whiteteam;
-                    for (int i=0; i<16; i++)
-                        player->buttons[i] = &whiteButtons[i];
-                    std::cout<<"Received: "<<data;
-                    break;
-                }
-            }
-        }
-        statusstr = "Connected";
-        return true;
-    }
-    return false;*/
 }
 
 void GameView::initConnection(){
-    statusstr = "Connected - Waiting for opponent";
+    statusstr = "Connected. Waiting for opponent...";
     emit signalMessage();
-    player = new Player;
-    char buf[8];
-    qint16 datasize;
-    std::string data;
-    while(true){
-        datasize = socket->read(buf,8);
-        if (datasize > 0){
-            data = buf;
-            if (data == "black\n"){
-                player->team = blackteam;
-                for (int i=0; i<16; i++)
-                    player->buttons[i] = &blackButtons[i];
-                //std::cout<<"Received: "<<data;
-                break;
-            }
-            else if (data =="white\n"){
-                player->team = whiteteam;
-                for (int i=0; i<16; i++)
-                    player->buttons[i] = &whiteButtons[i];
-                //std::cout<<"Received: "<<data;
-                break;
-            }
-        }
-    }
-    emit connectionSuccess();
 }
 
 void GameView::failedConnection(){
@@ -199,23 +146,6 @@ void GameView::setup(){
     manage();
 }
 
-void GameView::run(){
-
-    //manage();
-    //update();
-
-    //this->show();
-
-    if (player){
-        if (!player->team->hasturn)
-            readData();
-    }
-}
-/*
-void GameView::changeStatusBarMessage(const char *msg){
-    statusstr = msg;
-}*/
-
 void GameView::update(){
     for (int i=0; i<16; i++){
         if (!blackteam->piece[i]->isCaptured()){
@@ -265,26 +195,44 @@ void GameView::writeData(int bx,int by,int x,int y){
 }
 
 void GameView::readData(){
-    statusstr = "Waiting for opponent's move..";
-    emit signalMessage();
+    if (!player){
 
-    QString data = socket->readAll();
+        player = new Player;
+        QString data = socket->readAll();
 
-    if (data == "CLOSE\n"){
-        statusstr = "Other player disconnected";
-        emit connectionError();
-        return;
+        if (data == "BLACK\n"){
+            player->team = blackteam;
+            for (int i=0; i<16; i++)
+                player->buttons[i] = &blackButtons[i];
+        }
+        else if (data =="WHITE\n"){
+            player->team = whiteteam;
+            for (int i=0; i<16; i++)
+                player->buttons[i] = &whiteButtons[i];
+        }
+        emit connectionSuccess();
     }
+    else{
+        statusstr = "Waiting for opponent's move..";
+        emit signalMessage();
 
-    int bx = (int)data.toStdString().at(0)-48;
-    int by = (int)data.toStdString().at(1)-48;
-    int x = (int)data.toStdString().at(2)-48;
-    int y = (int)data.toStdString().at(3)-48;
+        QString data = socket->readAll();
 
-    if (gameBoard->selectPieceAt(bx,by))
-        gameBoard->moveSelected(x,y);
-    manage();
+        if (data == "CLOSE\n"){
+            statusstr = "Other player disconnected";
+            emit connectionError();
+            return;
+        }
 
+        int bx = (int)data.toStdString().at(0)-48;
+        int by = (int)data.toStdString().at(1)-48;
+        int x = (int)data.toStdString().at(2)-48;
+        int y = (int)data.toStdString().at(3)-48;
+
+        if (gameBoard->selectPieceAt(bx,by))
+            gameBoard->moveSelected(x,y);
+        manage();
+    }
 }
 
 void GameView::closeConnection(){

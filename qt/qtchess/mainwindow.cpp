@@ -73,6 +73,7 @@ void MainWindow::disconnectTriggered()
     ui->stackedWidget->setCurrentWidget(ui->connect_page);
     resetSize();
     delete gameview;
+    ui->connect_connect->setEnabled(true);
 }
 
 void MainWindow::closeTriggered(){
@@ -84,6 +85,7 @@ void MainWindow::closeTriggered(){
 
 void MainWindow::on_connect_connect_clicked()
 {
+    ui->connect_connect->setEnabled(false);
     QString addr = ui->connect_address->text();
     qint16 port = ui->connect_port->text().toInt();
 
@@ -97,8 +99,6 @@ void MainWindow::on_connect_connect_clicked()
 }
 
 void MainWindow::startGame(){
-
-
     gameview->setParent(ui->game_page);
     ui->stackedWidget->setCurrentWidget(ui->game_page);
     int width = gameview->size().width();
