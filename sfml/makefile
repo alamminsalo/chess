@@ -1,5 +1,5 @@
-CPP = main.cpp sfmlboard.cpp board.cpp piece.cpp
-OBJECTS = main.o sfmlboard.o board.o piece.o
+CPP = main.cpp sfmlboard.cpp ../logic/src/board.cpp ../logic/src/piece.cpp
+OBJECTS = main.o sfmlboard.o ../logic/src/board.o ../logic/src/piece.o
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lsfml-network
 
 sfml-app: $(OBJECTS)

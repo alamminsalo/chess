@@ -1,8 +1,8 @@
 del *.o
 
-g++ -c *.cpp -IC:\SFML-2.1\include
+g++ -c main.cpp sfmlboard.cpp ../logic/src/board.cpp ../logic/src/piece.cpp -IC:\SFML-2.1\include
 
-g++ *.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
+g++ main.o sfmlboard.o ../logic/src/board.o ../logic/src/piece.o -o sfml-app.exe -LC:\SFML-2.1\lib -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network
 
 mkdir chessBuildWin
 mkdir chessBuildWin\bin
