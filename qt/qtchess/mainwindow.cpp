@@ -6,11 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    gameRunning = false;
-
     ui->setupUi(this);
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(closeTriggered()));
     connect(ui->actionDisconnect,SIGNAL(triggered()),SLOT(disconnectTriggered()));
+    loadConfig();
 }
 
 MainWindow::~MainWindow()
@@ -69,7 +68,6 @@ void MainWindow::on_search_back_clicked()
 void MainWindow::disconnectTriggered()
 {
     changeStatus();
-    gameRunning = false;
     ui->connect_connect->setEnabled(true);
     ui->stackedWidget->setCurrentWidget(ui->connect_page);
     resetSize();
@@ -77,7 +75,7 @@ void MainWindow::disconnectTriggered()
 }
 
 void MainWindow::closeTriggered(){
-    if (gameRunning){
+    if (gameview){
         delete gameview;
     }
     this->close();
@@ -85,18 +83,26 @@ void MainWindow::closeTriggered(){
 
 void MainWindow::on_connect_connect_clicked()
 {
-    ui->connect_connect->setEnabled(false);
     QString addr = ui->connect_address->text();
     qint16 port = ui->connect_port->text().toInt();
     QString name = ui->connect_name->text();
 
-    gameview = new GameView();
+    if (name != ""){
+        ui->connect_name->setStyleSheet("");
+        saveConfig();
+        ui->connect_connect->setEnabled(false);
+        gameview = new GameView();
 
-    this->connect(gameview,SIGNAL(connectionSuccess()),this,SLOT(startGame()));
-    this->connect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
-    this->connect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
+        this->connect(gameview,SIGNAL(connectionSuccess()),this,SLOT(startGame()));
+        this->connect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
+        this->connect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
 
-    gameview->connectToServer(addr,port,name);
+        gameview->connectToServer(addr,port,name);
+    }
+    else {
+        ui->connect_name->setStyleSheet("QLineEdit {background-color:#F5A9A9}");
+        ui->statusBar->showMessage("REQUIRED: Name",0);
+    }
 }
 
 void MainWindow::startGame(){
@@ -111,10 +117,66 @@ void MainWindow::startGame(){
 
     ui->actionDisconnect->setEnabled(true);
 
-    gameRunning = true;
     changeStatus();
 }
 
 void MainWindow::changeStatus(){
     ui->statusBar->showMessage(gameview->getStatus(),0);
+}
+
+int MainWindow::loadConfig(){
+    QFile file("config.xml");
+    if (!file.open(QIODevice::ReadOnly)){
+        qDebug()<<"Error reading configuration file!";
+        return -1;
+    }
+    QXmlStreamReader xml(&file);
+    QString str;
+    while (!xml.atEnd()){
+        xml.readNext();
+        if (xml.name() == "name"){
+            str = xml.readElementText();
+            str = str == "" ? "Chess Master" : str;
+            ui->connect_name->setText(str);
+        }
+        if (xml.name() == "address"){
+            str = xml.readElementText();
+            str = str == "" ? "localhost" : str;
+            ui->connect_address->setText(str);
+        }
+        if (xml.name() == "port"){
+            str = xml.readElementText();
+            str = str == "" ? "3333" : str;
+            ui->connect_port->setText(str);
+        }
+    }
+    file.close();
+
+    return 0;
+}
+
+int MainWindow::saveConfig(){
+    QFile file("config.xml");
+    if (!file.open(QIODevice::WriteOnly)){
+        qDebug()<<"Error writing configuration file!";
+        return -1;
+    }
+    QXmlStreamWriter xml(&file);
+    xml.setAutoFormatting(true);
+    xml.writeStartDocument();
+
+    xml.writeStartElement("config");
+
+    xml.writeTextElement("name",ui->connect_name->text());
+
+    xml.writeStartElement("host");
+    xml.writeTextElement("address",ui->connect_address->text());
+    xml.writeTextElement("port",ui->connect_port->text());
+    xml.writeEndElement();
+
+    xml.writeEndElement();
+
+    file.close();
+
+    return 0;
 }

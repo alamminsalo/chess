@@ -139,7 +139,7 @@
        <string>Server IP address or domain</string>
       </property>
       <property name="text">
-       <string>localhost</string>
+       <string/>
       </property>
       <property name="maxLength">
        <number>100</number>
@@ -161,7 +161,7 @@
        <string>Server port</string>
       </property>
       <property name="text">
-       <string>3333</string>
+       <string/>
       </property>
       <property name="maxLength">
        <number>4</number>
@@ -209,7 +209,7 @@
        <string>Your name goes here</string>
       </property>
       <property name="text">
-       <string>Chess Master</string>
+       <string/>
       </property>
       <property name="maxLength">
        <number>24</number>

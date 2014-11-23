@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 #include "gameview.h"
 
 namespace Ui {
@@ -11,12 +14,13 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    bool gameRunning;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void resetSize();
+    int loadConfig();
+    int saveConfig();
 
 
 private slots:
