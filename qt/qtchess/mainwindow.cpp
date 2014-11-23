@@ -72,13 +72,9 @@ void MainWindow::disconnectTriggered()
     ui->connect_connect->setEnabled(true);
     ui->stackedWidget->setCurrentWidget(ui->connect_page);
     resetSize();
-    this->disconnect(gameview,SIGNAL(connectionSuccess()),this,SLOT(startGame()));
-    this->disconnect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
-    this->disconnect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
-
     if (gameview)
         delete gameview;
-    qDebug()<<"Disconnect ended";
+    ui->actionDisconnect->setEnabled(false);
 }
 
 void MainWindow::closeTriggered(){

@@ -265,8 +265,13 @@ void GameView::readData(){
 
         QString data = socket->readAll();
 
-        if (data == "CLOSE\n"){
+        if (data == "CLOSE_CL\n"){
             statusstr = "Other player disconnected";
+            emit connectionError();
+            return;
+        }
+        else if (data == "CLOSE_SV\n"){
+            statusstr = "Server disconnected";
             emit connectionError();
             return;
         }
