@@ -45,6 +45,8 @@ class GameView : public QGraphicsView
     Team *whiteteam;
 
     Player *player;
+    QString name;
+    QString pass;
     QByteArray message;
 
     void setup();
@@ -59,7 +61,7 @@ public:
     GameView();
     ~GameView();
     QString getStatus(){ return statusstr; }
-    void connectToServer(QString,qint16,QString);
+    void connectToServer(QString,qint16,QString,QString);
     void closeConnection();
 
 signals:

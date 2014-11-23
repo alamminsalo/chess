@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(closeTriggered()));
     connect(ui->actionDisconnect,SIGNAL(triggered()),SLOT(disconnectTriggered()));
+    ui->connect_pass->setEchoMode(QLineEdit::Password);
     loadConfig();
 }
 
@@ -71,7 +72,13 @@ void MainWindow::disconnectTriggered()
     ui->connect_connect->setEnabled(true);
     ui->stackedWidget->setCurrentWidget(ui->connect_page);
     resetSize();
-    delete gameview;
+    this->disconnect(gameview,SIGNAL(connectionSuccess()),this,SLOT(startGame()));
+    this->disconnect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
+    this->disconnect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
+
+    if (gameview)
+        delete gameview;
+    qDebug()<<"Disconnect ended";
 }
 
 void MainWindow::closeTriggered(){
@@ -86,9 +93,9 @@ void MainWindow::on_connect_connect_clicked()
     QString addr = ui->connect_address->text();
     qint16 port = ui->connect_port->text().toInt();
     QString name = ui->connect_name->text();
+    QString pass = ui->connect_pass->text();
 
-    if (name != ""){
-        ui->connect_name->setStyleSheet("");
+    if (name != "" && pass != ""){
         saveConfig();
         ui->connect_connect->setEnabled(false);
         gameview = new GameView();
@@ -97,11 +104,10 @@ void MainWindow::on_connect_connect_clicked()
         this->connect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
         this->connect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
 
-        gameview->connectToServer(addr,port,name);
+        gameview->connectToServer(addr,port,name,pass);
     }
     else {
-        ui->connect_name->setStyleSheet("QLineEdit {background-color:#F5A9A9}");
-        ui->statusBar->showMessage("REQUIRED: Name",0);
+        ui->statusBar->showMessage("Please give name and password",0);
     }
 }
 

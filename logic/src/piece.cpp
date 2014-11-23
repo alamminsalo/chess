@@ -108,6 +108,7 @@ void Pawn::setActive(){
 			tmpsqr->active = true;
 			if (tmpsqr->piece){
 				tmpsqr->active = false;
+                break;
 			}
 			//if (tmpsqr->active) addActive(x,y);
 		}

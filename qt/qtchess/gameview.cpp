@@ -26,25 +26,25 @@ GameView::GameView()
 
 
 GameView::~GameView(){
-    qDebug()<<"Deleting gameview..\n";
+    qDebug()<<"Deleting gameview..";
     if (socket){
-        qDebug()<<"Deleting socket..\n";
+        qDebug()<<"Deleting socket..";
         if (socket->isOpen())
             closeConnection();
         delete socket;
         delete player;
     }
-    qDebug()<<"Deleting board..\n";
+    qDebug()<<"Deleting board..";
     delete gameBoard;
+    qDebug()<<"All done.";
 }
 
-void GameView::connectToServer(QString addr, qint16 port,QString name){
+void GameView::connectToServer(QString addr, qint16 port,QString name,QString pass){
     statusstr = "Connecting...";
     emit signalMessage();
 
-    message.clear();
-    message.append(name);
-    message.append('\n');
+    this->name = name;
+    this->pass = pass;
 
     QHostAddress host;
     host.setAddress(addr);
@@ -58,6 +58,16 @@ void GameView::connectToServer(QString addr, qint16 port,QString name){
 }
 
 void GameView::initConnection(){
+    message.clear();
+    message.append(name);
+    message.append('\n');
+    socket->write(message);
+
+    message.clear();
+    message.append(pass);
+    message.append('\n');
+    socket->write(message);
+
     statusstr = "Connected. Waiting for opponent...";
     emit signalMessage();
 }
@@ -73,13 +83,13 @@ void GameView::setup(){
     this->setMouseTracking(true);
 
     for (int y=0; y<8; y++)
-            for (int x=0; x<8; x++){
-                square[x][y].setPen(Qt::NoPen);
-                square[x][y].setRect(0,0,HEIGHT/8,WIDTH/8);
-                square[x][y].setBrush(QBrush(Qt::transparent));
-                scene.addItem(&square[x][y]);
-                square[x][y].setPos(x*(WIDTH/8),y*(HEIGHT/8));
-            }
+        for (int x=0; x<8; x++){
+            square[x][y].setPen(Qt::NoPen);
+            square[x][y].setRect(0,0,HEIGHT/8,WIDTH/8);
+            square[x][y].setBrush(QBrush(Qt::transparent));
+            scene.addItem(&square[x][y]);
+            square[x][y].setPos(x*(WIDTH/8),y*(HEIGHT/8));
+        }
 
     bpctex[0].load("img/bpawn.png");
     bpctex[1].load("img/bknight.png");
@@ -228,7 +238,6 @@ void GameView::writeData(int bx,int by,int x,int y,std::string piece){
 
 void GameView::readData(){
     if (!player){
-
         player = new Player;
         QString data = socket->readAll();
 
@@ -242,10 +251,11 @@ void GameView::readData(){
             for (int i=0; i<16; i++)
                 player->buttons[i] = &whiteButtons[i];
         }
-
-        qDebug()<<"Sending name to server..";
-        socket->write(message);
-        //socket->waitForBytesWritten(1000);
+        else if (data == "LOGIN_ERROR\n"){
+            statusstr = "Wrong username or password";
+            emit connectionError();
+            return;
+        }
 
         emit connectionSuccess();
     }
