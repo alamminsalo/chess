@@ -212,7 +212,7 @@
        <string>Chess Master</string>
       </property>
       <property name="maxLength">
-       <number>48</number>
+       <number>24</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">

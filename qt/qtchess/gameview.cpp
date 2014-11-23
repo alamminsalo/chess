@@ -38,10 +38,13 @@ GameView::~GameView(){
     delete gameBoard;
 }
 
-void GameView::connectToServer(QString addr, qint16 port){
-    //changeStatusBarMessage("Connecting..");
+void GameView::connectToServer(QString addr, qint16 port,QString name){
     statusstr = "Connecting...";
     emit signalMessage();
+
+    message.clear();
+    message.append(name);
+    message.append('\n');
 
     QHostAddress host;
     host.setAddress(addr);
@@ -187,10 +190,39 @@ void GameView::manage(){
     update();
 }
 
-void GameView::writeData(int bx,int by,int x,int y){
-    char buf[6] = {(char)(bx+48),(char)(by+48),(char)(x+48),(char)(y+48),'\n'};
+void GameView::writeData(int bx,int by,int x,int y,std::string piece){
 
-    socket->write(buf,5);
+
+    char buf[6] = {(char)(bx+48),(char)(by+48),(char)(x+48),(char)(y+48)};
+    message.clear();
+    message.append(buf);
+    message.append('\n');
+    socket->write(message);
+    socket->waitForBytesWritten(1000);
+
+    message.clear();
+    message.append(piece.c_str());
+    message.append('\n');
+    socket->write(message);
+    socket->waitForBytesWritten(1000);
+
+    message.clear();
+    switch (gameBoard->getStatus()){
+        case STATUS_NOCHECK:
+            message.append("-");
+            break;
+        case STATUS_CHECK:
+            message.append("CHECK");
+            break;
+        case STATUS_CHECKMATE:
+            message.append("CHECKMATE");
+            break;
+        case STATUS_STALEMATE:
+            message.append("STALEMATE");
+            break;
+    }
+    message.append('\n');
+    socket->write(message);
     socket->waitForBytesWritten(1000);
 }
 
@@ -210,6 +242,11 @@ void GameView::readData(){
             for (int i=0; i<16; i++)
                 player->buttons[i] = &whiteButtons[i];
         }
+
+        qDebug()<<"Sending name to server..";
+        socket->write(message);
+        //socket->waitForBytesWritten(1000);
+
         emit connectionSuccess();
     }
     else{
@@ -253,8 +290,9 @@ void GameView::mousePressEvent ( QMouseEvent * event ){
                             else {
                                 int bX = gameBoard->getSelected()->getX();
                                 int bY = gameBoard->getSelected()->getY();
+                                std::string piecename = gameBoard->getSelected()->getName();
                                 if (gameBoard->moveSelected(x,y) == 0){
-                                    writeData(bX,bY,x,y);
+                                    writeData(bX,bY,x,y,piecename);
                                 }
                                 else{
                                     statusstr = "Error: Illegal move";

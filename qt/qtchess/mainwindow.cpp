@@ -88,6 +88,7 @@ void MainWindow::on_connect_connect_clicked()
     ui->connect_connect->setEnabled(false);
     QString addr = ui->connect_address->text();
     qint16 port = ui->connect_port->text().toInt();
+    QString name = ui->connect_name->text();
 
     gameview = new GameView();
 
@@ -95,7 +96,7 @@ void MainWindow::on_connect_connect_clicked()
     this->connect(gameview,SIGNAL(connectionError()),this,SLOT(disconnectTriggered()));
     this->connect(gameview,SIGNAL(signalMessage()),this,SLOT(changeStatus()));
 
-    gameview->connectToServer(addr,port);
+    gameview->connectToServer(addr,port,name);
 }
 
 void MainWindow::startGame(){
