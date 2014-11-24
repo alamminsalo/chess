@@ -66,14 +66,11 @@ public:
 
 signals:
     void signalMessage();
-    void connectionSuccess();
     void connectionError();
 
 public slots:
     void readData();
     void writeData(int,int,int,int,std::string);
-    void initConnection();
-    void failedConnection();
 };
 
 #endif // GAMEVIEW_H

@@ -235,12 +235,12 @@ void MainWindow::readData(){
     QString data = socket.readAll();
     qDebug()<<"data: "<<data;
 
-    /*if (data == NULL){
+    if (data == NULL){
         ui->statusBar->showMessage("Error: Server dropped the connection",0);
         ui->connect_connect->setEnabled(true);
         disconnectTriggered();
         return;
-    }*/
+    }
     if (data == "PING\n"){
         socket.write("PONG\n");
     }

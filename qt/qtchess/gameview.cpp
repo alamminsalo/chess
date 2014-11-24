@@ -54,28 +54,6 @@ GameView::~GameView(){
     qDebug()<<"All done.";
 }
 
-void GameView::initConnection(){
-    message.clear();
-    message.append(name);
-    message.append('\n');
-    socket->write(message);
-
-    message.clear();
-    message.append(pass);
-    message.append('\n');
-    socket->write(message);
-
-    statusstr = "Connected. Waiting for opponent...";
-    emit signalMessage();
-}
-
-void GameView::failedConnection(){
-    statusstr = "Error connecting to server";
-    qDebug() << "CONN_FAILED";
-    emit signalMessage();
-    emit connectionError();
-}
-
 void GameView::setup(){
 
     this->setMouseTracking(true);
