@@ -2,7 +2,6 @@
 
 GameView::GameView()
 {
-
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setScene(&scene);
@@ -24,37 +23,35 @@ GameView::GameView()
     setup();
 }
 
+GameView::GameView(QTcpSocket *tcpsocket, QString side): GameView(){
+    socket = tcpsocket;
+    connect(socket,SIGNAL(readyRead()),this,SLOT(readData()));
+
+    if (side == "BLACK\n"){
+        qDebug()<<"Got side BLACK";
+        player = new Player;
+        player->team = blackteam;
+        for (int i=0; i<16; i++)
+            player->buttons[i] = &blackButtons[i];
+    }
+    else if (side =="WHITE\n"){
+        qDebug()<<"Got side WHITE";
+        player = new Player;
+        player->team = whiteteam;
+        for (int i=0; i<16; i++)
+            player->buttons[i] = &whiteButtons[i];
+    }
+}
+
 
 GameView::~GameView(){
     qDebug()<<"Deleting gameview..";
-    if (socket){
-        qDebug()<<"Deleting socket..";
-        if (socket->isOpen())
-            closeConnection();
-        delete socket;
+    if (player){
         delete player;
     }
     qDebug()<<"Deleting board..";
     delete gameBoard;
     qDebug()<<"All done.";
-}
-
-void GameView::connectToServer(QString addr, qint16 port,QString name,QString pass){
-    statusstr = "Connecting...";
-    emit signalMessage();
-
-    this->name = name;
-    this->pass = pass;
-
-    QHostAddress host;
-    host.setAddress(addr);
-    socket = new QTcpSocket(this);
-
-    connect(socket,SIGNAL(connected()),this,SLOT(initConnection()));
-    connect(socket,SIGNAL(readyRead()),this,SLOT(readData()));
-    connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(failedConnection()));
-
-    socket->connectToHost(addr,port);
 }
 
 void GameView::initConnection(){
@@ -74,6 +71,7 @@ void GameView::initConnection(){
 
 void GameView::failedConnection(){
     statusstr = "Error connecting to server";
+    qDebug() << "CONN_FAILED";
     emit signalMessage();
     emit connectionError();
 }
@@ -201,20 +199,19 @@ void GameView::manage(){
 }
 
 void GameView::writeData(int bx,int by,int x,int y,std::string piece){
-
-
+    qDebug()<<"Writing move..";
     char buf[6] = {(char)(bx+48),(char)(by+48),(char)(x+48),(char)(y+48)};
     message.clear();
     message.append(buf);
     message.append('\n');
     socket->write(message);
-    socket->waitForBytesWritten(1000);
+    //socket->waitForBytesWritten(1000);
 
     message.clear();
     message.append(piece.c_str());
     message.append('\n');
     socket->write(message);
-    socket->waitForBytesWritten(1000);
+    //socket->waitForBytesWritten(1000);
 
     message.clear();
     switch (gameBoard->getStatus()){
@@ -233,49 +230,29 @@ void GameView::writeData(int bx,int by,int x,int y,std::string piece){
     }
     message.append('\n');
     socket->write(message);
-    socket->waitForBytesWritten(1000);
+    //socket->waitForBytesWritten(1000);
+    qDebug()<<"Wrote move!";
 }
 
 void GameView::readData(){
-    if (!player){
-        player = new Player;
-        QString data = socket->readAll();
+    QString data = socket->readAll();
 
-        if (data == "BLACK\n"){
-            player->team = blackteam;
-            for (int i=0; i<16; i++)
-                player->buttons[i] = &blackButtons[i];
-        }
-        else if (data =="WHITE\n"){
-            player->team = whiteteam;
-            for (int i=0; i<16; i++)
-                player->buttons[i] = &whiteButtons[i];
-        }
-        else if (data == "LOGIN_ERROR\n"){
-            statusstr = "Wrong username or password";
-            emit connectionError();
-            return;
-        }
-
-        emit connectionSuccess();
+    if (data == "CLOSE_CL\n"){
+        statusstr = "Other player disconnected";
+        qDebug()<<"Received CLOSE_CL";
+        emit connectionError();
     }
+    else if (data == "CLOSE_SV\n"){
+        statusstr = "Server disconnected";
+        qDebug()<<"Received CLOSE_SV";
+        emit connectionError();
+    }
+    else if (data == "PING\n"){
+        qDebug()<<"Received PING";
+        socket->write("PONG\n");
+    }
+
     else{
-        statusstr = "Waiting for opponent's move..";
-        emit signalMessage();
-
-        QString data = socket->readAll();
-
-        if (data == "CLOSE_CL\n"){
-            statusstr = "Other player disconnected";
-            emit connectionError();
-            return;
-        }
-        else if (data == "CLOSE_SV\n"){
-            statusstr = "Server disconnected";
-            emit connectionError();
-            return;
-        }
-
         int bx = (int)data.toStdString().at(0)-48;
         int by = (int)data.toStdString().at(1)-48;
         int x = (int)data.toStdString().at(2)-48;
@@ -285,10 +262,6 @@ void GameView::readData(){
             gameBoard->moveSelected(x,y);
         manage();
     }
-}
-
-void GameView::closeConnection(){
-    socket->close();
 }
 
 void GameView::mousePressEvent ( QMouseEvent * event ){

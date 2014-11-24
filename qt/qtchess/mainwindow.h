@@ -14,6 +14,7 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    QTcpSocket socket;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -21,7 +22,11 @@ public:
     void resetSize();
     int loadConfig();
     int saveConfig();
+    void startLocalGame();
+    void startOnlineGame(QString);
 
+signals:
+    void authDone();
 
 private slots:
     void on_main_connect_clicked();
@@ -48,7 +53,11 @@ private slots:
 
     void disconnectTriggered();
 
-    void startGame();
+
+
+    void authenticate();
+    void connectionFailed();
+    void readData();
 
 private:
     Ui::MainWindow *ui;

@@ -136,7 +136,7 @@
        <string>Eg &quot;134.32.110.56&quot; or &quot;chess.somedomain.org&quot;</string>
       </property>
       <property name="statusTip">
-       <string>Server IP address or domain</string>
+       <string/>
       </property>
       <property name="text">
        <string/>
@@ -158,7 +158,7 @@
        <string>Default is 3333</string>
       </property>
       <property name="statusTip">
-       <string>Server port</string>
+       <string/>
       </property>
       <property name="text">
        <string/>
@@ -206,7 +206,7 @@
        <string>Set a nickname which will be recorded to database</string>
       </property>
       <property name="statusTip">
-       <string>Your name goes here</string>
+       <string/>
       </property>
       <property name="text">
        <string/>

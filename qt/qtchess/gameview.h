@@ -8,7 +8,6 @@
 #include <QGraphicsRectItem>
 #include <QPixmap>
 #include <QtNetwork/QTcpSocket>
-#include <QtNetwork/QHostAddress>
 #include <QMouseEvent>
 #include <QThread>
 
@@ -59,9 +58,10 @@ class GameView : public QGraphicsView
 
 public:
     GameView();
+    GameView(QTcpSocket*,QString);
     ~GameView();
     QString getStatus(){ return statusstr; }
-    void connectToServer(QString,qint16,QString,QString);
+   // void connectToServer(QString,qint16,QString,QString);
     void closeConnection();
 
 signals:
