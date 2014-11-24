@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    gameview = NULL;
     ui->setupUi(this);
     connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(closeTriggered()));
     connect(ui->actionDisconnect,SIGNAL(triggered()),SLOT(disconnectTriggered()));
