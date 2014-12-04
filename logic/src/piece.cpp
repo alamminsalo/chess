@@ -50,43 +50,6 @@ void Piece::addPosition(int x,int y){
 	position->next = NULL;
 }
 
-void Piece::addActive(int x, int y){
-	if (!active_root){
-		active_root = new Position;
-		active = active_root;	
-	}
-	else{
-		active->next = new Position;
-		active = active->next;
-	}
-	active->x = x;
-	active->y = y;
-	active->next = NULL;
-	std::cout<<"Added active!\n";
-
-	Position *tmp = active_root;
-	while (tmp){
-		std::cout<<"next\n";
-		if(tmp->next)
-			tmp = tmp->next;
-		else break;
-	}
-}
-
-void Piece::clearActiveList(){
-	Position *tmp;
-	while (active_root){
-		tmp = active_root;
-		active_root = active_root->next;
-		delete tmp;
-	}
-	std::cout<<"Cleared active list\n";
-}
-
-Position* Piece::getActivePositionRoot(){
-	return active_root;
-}
-
 void Piece::move(int x,int y){
 	if (board->getSquare(x,y)->piece){
 		board->getSquare(x,y)->piece->setCaptured(true);

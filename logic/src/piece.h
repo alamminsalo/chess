@@ -33,7 +33,6 @@ protected:
 	unsigned short type;
 
 	void addPosition(int,int);
-	void addActive(int,int);
 
 public:
 	Piece();
@@ -42,8 +41,6 @@ public:
 	void move(int,int);
 	void setTeam(unsigned short s){ team = s; };
 	unsigned short getTeam(){ return team; }; 
-	Position* getActivePositionRoot();
-	void clearActiveList();
 	void setCaptured(bool b){ captured = b; };
 	bool isCaptured(){ return captured; };
 	int getX(){return position->x;};
