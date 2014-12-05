@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/WEB-INF/web.xml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/printGames.xhtml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/searchGames.xhtml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/index.xhtml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/FaceBean.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/createUser.xhtml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/Server.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/Game.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/Player.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/printPlayers.xhtml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/Test.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/WEB-INF/faces-config.xml</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/ServerDatabaseConnector.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/src/java/Controller/ListenerThread.java</file>
+            <file>file:/home/antti/NetBeansProjects/ChessServ/web/printMoves.xhtml</file>
+        </group>
+    </open-files>
+</project-private>

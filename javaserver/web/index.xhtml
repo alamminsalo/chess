@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h:form>
+            <h:commandLink value="Show all players" action="${faceBean.getPlayers}"></h:commandLink>
+    <br/>
+    <h:commandLink value="Show all played games" action="${faceBean.getGames}"></h:commandLink>
+    <br/>
+    <h:commandLink value="Show all played moves" action="${faceBean.getMoves}"></h:commandLink>
+    <br/><br/>
+    <h:commandButton value="Create new account" action="${faceBean.toPage(1)}"></h:commandButton>
+    <h:commandButton value="Search games" action="${faceBean.toPage(2)}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+
