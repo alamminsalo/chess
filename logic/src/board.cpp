@@ -203,6 +203,7 @@ int Board::evaluateMate(){
 			root = pos = getActiveList(getActiveTeam()->piece[i]); 
 			while (pos){
 				if (simulateMove(getActiveTeam()->piece[i],pos->x,pos->y) == 0){
+					deleteActiveList(root);
 					getActiveTeam()->oncheck = teamoncheck;
 					return 0;
 				}
@@ -211,7 +212,7 @@ int Board::evaluateMate(){
 				pos = pos->next;
 			}
 			std::cout<<"Arrived to end of list\n";
-            deleteActiveList(root);
+      deleteActiveList(root);
 			//getActiveTeam()->piece[i]->clearActiveList();
 		}
 	}	
